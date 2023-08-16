@@ -4,131 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/main.css" />
-    <style>
-      header {
-        border-bottom: solid 1px lightgrey;
-      }
-      .category {
-        display: flex;
-        justify-content: center;
-        margin: 40px 0 20px 0;
-      }
-
-      .category ul {
-        list-style: none;
-        display: flex;
-        gap: 20px;
-      }
-
-      .category button {
-        padding: 8px 16px;
-        background-color: #90FC2B;
-        border: none;
-        border-radius: 20px;
-        /* background-color: transparent; */
-        color: #333;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      .category button:hover {
-        background-color: #55E61C;
-        color: #fff;
-      }
-
-      .category button:focus {
-        outline: 1px solid #A6E61C;
-      }
-
-      .category button:active{
-        background-color: #55E61C;
-      }
-
-      .cardContainerWrapper {
-        display: grid;
-        gap: 20px;
-        margin: 10px 0 50px 80px;
-        position: relative; /* To make sure the cardNonText is positioned relative to this container */
-      }
-
-      .card-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 20px;
-        margin: 10px 0 50px 0px;
-      }
-
-      .cardNonText {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        position: absolute; /* Position it absolutely within the wrapper */
-        top: 0;
-        left: 0;
-        width: 100%;
-      }
-
-      .card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        padding: 20px;
-        max-width: 300px;
-        /* Your existing card styles */
-        flex: 0 0 calc(25% - 20px); /* Adjust width and margin */
-        margin: 30px 30px;
-      }
-
-      .card img {
-        max-width: 100%;
-        border-radius: 8px;
-        margin-bottom: 10px;
-      }
-
-      .card-title {
-        font-size: 1.5rem;
-        margin: 10px 0;
-      }
-
-      .card-description {
-        font-size: 1rem;
-        color: #777;
-      }
-
-      .card-button {
-        display: inline-block;
-        background-color: #4CAF50;
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 20px;
-        text-decoration: none;
-        margin-top: 10px;
-        transition: background-color 0.3s;
-      }
-
-      .card-button:hover {
-        background-color: #55E61C;
-      }
-
-      .card-button:focus {
-        outline: 1px solid #A6E61C;
-      }
-
-      .card-button:active{
-        background-color: #55E61C;
-      }
-
-      footer {
-        border-top: solid 1px lightgray;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        padding: 20px 80px;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/sale.css">
     <title>Document</title>
   </head>
   <body>
@@ -246,6 +122,7 @@
       location.replace("/logout");
     };
 
+    // 카테고리 전체리스트
     const categoryAllList = () => {
       location.replace("/sale");
     };
