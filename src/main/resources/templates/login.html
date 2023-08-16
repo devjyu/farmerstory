@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Farmer's Story 로그인</title>
+</head>
+<body>
+    <section>
+        <div>
+            <a href="/main">
+                <img src="/img/logo.png" alt="로고">
+            </a>
+        </div>
+        <div class="inputTextfields">
+            <div>
+                <input id="id" type="text" placeholder="아이디를 입력해주세요">
+            </div>
+            <div class="passwordText">
+                <input id="password" type="password" placeholder="비밀번호를 입력해주세요">
+            </div>
+            <div class="linkText">
+                <a href="/join">
+                    <h5>회원가입</h5>
+                </a>
+                <h5>ID / PW 찾기</h5>
+            </div>
+            <div>
+                <button class="loginBtn" onclick="requestLogin()">로그인하기</button>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    // 비밀번호 입력창에서 엔터키를 치면 로그인 요청하는 함수
+    document.querySelector("#password").addEventListener("keyup", (event) => {
+        if (event.keyCode === 13) {
+            requestLogin();
+        }
+    });
+
+    // 로그인 요청하는 함수
+    // 로그인 버튼을 누르면 실행
+    const requestLogin = () => {
+        // 서버와 통신하기 전에 입력값 검증
+        if (!validateFields()) {
+            return;
+        }
+
+        // 로그인 요청
+        const dto = {
+            user : {
+                id : document.getElementById("id").value,
+                password : document.getElementById("password").value,
+            }
+        }
+        fetch("/api/v1/auth/login", {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json;charset=utf-8"
+            },
+            body : JSON.stringify(dto)
+        })
+        .then(reponse => reponse.json())
+        .then(result => {
+            alert(result.message);
+            if (result.code === 0) {
+                location.replace("/main");
+            }
+        })
+    };
+
+    // 아이디와 비밀번호 입력창이 비어있는지 검사하는 함수
+    const validateFields = () => {
+        const idElement = document.querySelector("#id");
+        const passwordElement = document.querySelector("#password");
+
+        if (idElement.value === "") {
+            alert("아이디를 입력해주세요");
+            idElement.focus();
+            return false;
+        }
+
+        if (passwordElement.value === "") {
+            alert("비밀번호를 입력해주세요");
+            passwordElement.focus();
+            return false;
+        }
+
+        return true;
+    };
+
+    // 페이지가 로드되면 실행되는 함수
+    const setLoginPage = () => {
+        // 아이디 입력창에 포커스가 가도록
+        const idElement = document.querySelector("#id");
+        const passwordElement = document.querySelector("#password");
+    }
+</script>
+<script defer>
+    setLoginPage();
+</script>
+</html>

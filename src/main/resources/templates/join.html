@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/join.css">
+    <title>Farmer's Story 회원가입</title>
+</head>
+<body>
+    <section class="mainSection">
+        <div class="logoImg">
+            <img src="/img/logo.png" alt="로고">
+        </div>
+        <div class="userAuthority">
+            <button type="submit" id="farmerBtn">
+                <h5>농부</h5>
+            </button>
+            <button type="submit" id="publicBtn">
+                <h5>일반인</h5>
+            </button>
+        </div>
+        <div class="inputTextfields">
+            <div>
+                <input id="nickname" type="text" placeholder="닉네임(이름)을 입력해주세요">
+                <button id="nicknameCheckBtn" type="button" class="checkBtn">중복확인</button>
+            </div>
+            <div>
+                <input id="id" type="text" placeholder="아이디를 입력해주세요">
+                <button id="idCheckBtn" type="button" class="checkBtn">중복확인</button>
+            </div>
+            <div>
+                <input id="password" type="password" placeholder="비밀번호를 입력해주세요">
+            </div>
+            <div>
+                <input id="passwordCheck" type="password" placeholder="비밀번호를 확인해주세요">
+            </div>
+            <div>
+                <input id="email" type="text" placeholder="이메일을 입력해주세요">
+            </div>
+            <div>
+                <div><input type="file" id="file"></div>
+            </div>
+            <div class="fileInputImg">
+                <!-- <div
+                class="center-cover-back item"
+                th:style="'background-image: url('+ ${gallery.imgUrl} +');'"
+                ></div> -->
+                <img id="preview" src="" alt="" width="100%">
+            </div>
+            <div>
+                <button type="button" class="joinBtn" onclick="requestJoin()">가입하기</button>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script>
+    // // 파일업로드 버튼
+    // const uploadFile = () => {
+    //     const fileInputTag = document.querySelector("#file");
+
+    //     const formData = new FormData();
+
+    //     formData.append("file", fileInputTag.files[0]);
+
+    //     fetch("/api/v1/auth/profileImg", {
+    //         method: "POST",
+    //         body: formData,
+    //     })
+    //     .then((response) => response.json())
+    //     .then((result) => {
+    //         location.href = "/";
+    //     });
+    // };
+
+    // 농부와 일반인 유효성검사
+    var isFarmerBtn = false;
+    var isPublicBtn = false;
+    var count = 0;
+
+    // 버튼 id 가져오기
+    var farmerButton = document.getElementById("farmerBtn");
+    var publicButton = document.getElementById("publicBtn");
+
+    // 버튼 이벤트
+    document.addEventListener('DOMContentLoaded', () => {
+        // 농부 버튼 이벤트
+        farmerButton.addEventListener('click', (event) => {
+
+            isFarmerBtn = true;
+            isPublicBtn = false;
+
+            if (isFarmerBtn) {
+                count = 1;
+            }
+        })
+
+        // 일반 버튼 이벤트
+        publicButton.addEventListener('click', (event) => {
+            isPublicBtn = true;
+            isFarmerBtn = false;
+
+            if (isPublicBtn) {
+                count = 2;
+            }
+        })
+    });
+
+    // 중복체크
+    document.addEventListener('DOMContentLoaded', () => {
+        const idTag = document.querySelector('#id');
+        const nicknameTag = document.querySelector("#nickname");
+        const idCheckBtnTag = document.querySelector('#idCheckBtn');
+        const nicknameCheckBtnTag = document.querySelector('#nicknameCheckBtn');
+
+        // id중복체크
+        idCheckBtnTag.addEventListener('click', (event) => {
+            const idEl = idTag.value;
+
+            fetch("/api/v1/auth/id/check?id=" + idEl, {
+                method: "POST",
+            })
+            .then((response) => response.json())
+            .then((result) => {
+                alert(result.message);
+                if (result.code === 0) {
+                    idTag.disabled = true; // 중복이 아니라면 입력 필드를 비활성화
+                }
+            });
+        });
+
+        // 닉네임중복체크
+        nicknameCheckBtnTag.addEventListener('click', (event) => {
+            const nicknameEl = nicknameTag.value;
+
+            fetch("/api/v1/auth/nickname/check?nickname=" + nicknameEl, {
+                method: "POST",
+            })
+            .then((response) => response.json())
+            .then((result) => {
+                alert(result.message);
+                if (result.code === 0) {
+                    nicknameTag.disabled = true; // 중복이 아니라면 입력 필드를 비활성화
+                }
+            });
+        });
+    });
+
+    // 농부 또는 일반 버튼의 활성화
+    document.addEventListener('DOMContentLoaded', () => {
+        const farmerBtn = document.querySelector('#farmerBtn');
+        const publicBtn = document.querySelector('#publicBtn');
+
+        farmerBtn.addEventListener('click', () => {
+            farmerBtn.style.backgroundColor = '#55E61C';  // 클릭 시 진하게
+            publicBtn.style.backgroundColor = '#90FC2B'; // 연하게
+        });
+
+        publicBtn.addEventListener('click', () => {
+            publicBtn.style.backgroundColor = '#55E61C';
+            farmerBtn.style.backgroundColor = '#90FC2B';
+        });
+    });
+
+    // 파일 업로드
+    const fileInput = document.getElementById('file');
+        const preview = document.getElementById('preview');
+
+        fileInput.addEventListener('change', function () {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+            }
+    });
+
+    // 회원가입 요청
+    // 회원가입 버튼을 누르면 실행되는 함수
+    const requestJoin = () => {
+        // 서버와 통신하기 전에 입력값 검증
+        if (!validateFields()) {
+            return;
+        }
+
+        // // 회원가입 요청
+        // const dto = {
+        //     user: {
+        //         nickname: document.querySelector("#nickname").value,
+        //         id: document.querySelector("#id").value,
+        //         password: document.querySelector("#password").value,
+        //         email: document.querySelector("#email").value,
+        //         authority : authority,
+        //     },
+        // };
+
+        const nicknameTag = document.querySelector("#nickname");
+        const idTag = document.querySelector("#id");
+        const passwordTag = document.querySelector("#password");
+        const emailTag = document.querySelector("#email");
+        const authority = count;
+        const profileImg = document.querySelector("#file");
+
+        const formData = new FormData();
+
+        // formData에 데이터 넣어주기
+        formData.append("nickname", nicknameTag.value);
+        formData.append("id", idTag.value);
+        formData.append("password", passwordTag.value);
+        formData.append("email", emailTag.value);
+        formData.append("authority", authority);
+        if( profileImg.files.length > 0){
+            formData.append("profileImg", profileImg.files[0]);
+        }
+
+
+        fetch("/api/v1/auth/join",{
+            method : "POST",
+            body : formData
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            alert(result.message);
+            if (result.code === 0) {
+                // 회원가입 성공
+                location.replace("/login");
+            }
+        });
+    };
+
+    // 유효성 검사
+    const validateFields = () => {
+        // id 속성을 이용해서 해당하는 요소를 가져온다
+        const farmerBtnElement = isFarmerBtn;
+        const publicBtnElement = isPublicBtn;
+        const nicknameElement = document.querySelector("#nickname");
+        const idElement = document.querySelector("#id");
+        const passwordElement = document.querySelector("#password");
+        const passwordCheckElement = document.querySelector("#passwordCheck");
+        const emailElement = document.querySelector("#email");
+
+        if (farmerBtnElement == false && publicBtnElement == false) {
+            alert("농부 또는 일반을 클릭해주세요");
+            farmerBtn.focus();
+            return false;
+        }
+
+        if (nicknameElement.value === "") {
+            alert("닉네임을 확인해주세요");
+            nicknameElement.focus();
+            return false;
+        }
+
+        if (idElement.value === "") {
+            alert("아이디를 입력해주세요");
+            idElement.focus();
+            return false;
+        }
+        
+        if (passwordElement.value === "") {
+            alert("비밀번호를 입력해주세요");
+            passwordElement.focus();
+            return false;
+        }
+
+        if (passwordElement.value !== passwordCheckElement.value) {
+            alert("비밀번호가 일치하지 않습니다.");
+            passwordCheckElement.focus();
+            return false;
+        }
+
+        if (emailElement.value === "") {
+            alert("이메일을 입력해주세요");
+            emailElement.focus();
+            return false;
+        }
+
+        return true;
+    }
+
+</script>
+
+</html>

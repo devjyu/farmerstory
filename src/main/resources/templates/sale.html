@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      header {
+        border-bottom: solid 1px lightgrey;
+      }
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 1200px; /* Adjust as needed */
+      }
+
+      .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 20px;
+        max-width: 300px;
+        /* Your existing card styles */
+        flex: 0 0 calc(25% - 20px); /* Adjust width and margin */
+        margin: 30px 30px;
+      }
+
+      .card img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .card-title {
+        font-size: 1.5rem;
+        margin: 10px 0;
+      }
+
+      .card-description {
+        font-size: 1rem;
+        color: #777;
+      }
+
+      .card-button {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+      }
+
+      .card-button:hover {
+        background-color: #0056b3;
+      }
+
+      footer {
+        border-top: solid 1px lightgray;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <img th:src="${session.dto.user.profileImg}" alt="프로필"> -->
+    <header>
+      <div>
+        <a href="/main">
+          <img src="/img/logo.png" alt="로고" />
+        </a>
+      </div>
+      <div>
+        <ul>
+          <a href="/main">
+            <li>홈</li>
+          </a>
+          <li>일기쓰기</li>
+          <li>커뮤니티</li>
+          <a href="/sale">
+            <li>작물판매</li>
+          </a>
+        </ul>
+      </div>
+      <div class="userTag">
+        <ul th:if="${session.dto != null}">
+          <li>
+            <div class="userProfile">
+              <img th:src="${session.dto.user.profileImg}" alt="프로필" />
+            </div>
+          </li>
+          <li class="userNicknameText">
+            <span th:text="${session.dto.user.nickname}"></span>님 환영합니다!
+          </li>
+          <li class="sideMenuLi">
+            <span onclick="openSideMenu()">&#9776;</span>
+          </li>
+        </ul>
+        <ul th:if="${session.dto == null}">
+          <a href="/login">
+            <li class="userTagText">로그인</li>
+          </a>
+          <a href="/join">
+            <li class="userTagText">회원가입</li>
+          </a>
+        </ul>
+      </div>
+    </header>
+    <div id="sideMenu" class="side-menu">
+      <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
+      <ul class="side-menu-links">
+        <li><a href="#">개인정보수정</a></li>
+        <li><a href="#">장바구니</a></li>
+        <li><a href="javascript:logout();">로그아웃</a></li>
+      </ul>
+    </div>
+    <div class="category">
+      <ul>
+        <li><button onclick="getSaleListByCategoryIdx(5)">곡류</button></li>
+        <li><button onclick="getSaleListByCategoryIdx(4)">과실류</button></li>
+        <li><button>채소</button></li>
+        <li><button>버섯류</button></li>
+      </ul>
+    </div>
+    <div id="cardContainer" class="card-container">
+      <div class="card" th:each="sale : ${resSaleDTOList.saleList}">
+        <img th:src="${sale.saleImg}" alt="Card Image" />
+        <h2 class="card-title" th:text="${sale.title}"></h2>
+        <p class="card-description" th:text="${sale.introduction}"></p>
+        <h5 th:text="${sale.price}"></h5>
+        <a href="#" class="card-button">더 알아보기</a>
+      </div>
+    </div>
+    <footer>
+      <div>
+        <img src="/img/logo_name.png" alt="로고" />
+      </div>
+      <div>
+        <ul>
+          <li>
+            <a href="https://velog.io/@devjyu" target="_blank">
+              <img src="/img/velog_icon.png" alt="velog" />
+            </a>
+          </li>
+
+          <li>
+            <a href="https://github.com/devjyu" target="_blank">
+              <img src="/img/github_icon2.png" alt="github" />
+            </a>
+          </li>
+
+          <li>
+            <a href="">
+              <img src="/img/instagram_icon2.png" alt="instagram" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h5>(C)Copyright.Developer devjyu</h5>
+      </div>
+    </footer>
+  </body>
+  <script>
+    // 사이드 메뉴 열기
+    function openSideMenu() {
+      document.getElementById("sideMenu").classList.add("open");
+    }
+
+    // 사이드 메뉴 닫기
+    function closeSideMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+    }
+
+    // 로그아웃하기
+    const logout = () => {
+      location.replace("/logout");
+    };
+
+    // 카테고리 버튼 누르면 작동될 함수
+    const getSaleListByCategoryIdx = (categoryIdx) => {
+      fetch(`/api/v1/sale/category/${categoryIdx}`)
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.code === 0) {
+            const cardContainerTag = document.querySelector("#cardContainer");
+
+            cardContainerTag.innerHTML = "";
+
+            result.data.saleList.forEach((sale) => {
+              cardContainerTag.insertAdjacentHTML(
+                "beforeend",
+                `
+                <div class="card">
+                    <img src="${sale.saleImg}" alt="Card Image" />
+                    <h2 class="card-title">${sale.title}</h2>
+                    <p class="card-description">${sale.introduction}</p>
+                    <h5>${sale.price}</h5>
+                    <a href="#" class="card-button">더 알아보기</a>
+                </div>
+                `
+              );
+            });
+          }
+        });
+    };
+  </script>
+</html>
