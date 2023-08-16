@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.farmerstroy.domain.sale.dto.ResCategoryDTO;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDTO;
 import com.example.farmerstroy.model.category.entity.CategoryEntity;
 import com.example.farmerstroy.model.category.repository.CategoryRepository;
@@ -24,14 +23,8 @@ public class SaleService {
 
     public ResSaleDTO getSaleData() {
         List<SaleEntity> saleEntityList = saleRepository.findAll();
-        ResSaleDTO dto = ResSaleDTO.of(saleEntityList);
-        return dto ;
-    }
-
-    public ResCategoryDTO getCategoryName() {
         List<CategoryEntity> categoryNameList = categoryRepository.findAll();
-        ResCategoryDTO dto = ResCategoryDTO.of(categoryNameList);
-        return dto;
-
+        ResSaleDTO dto = ResSaleDTO.of(saleEntityList, categoryNameList);
+        return dto ;
     }
 }

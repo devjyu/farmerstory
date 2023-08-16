@@ -27,7 +27,7 @@ header h1 {
 header ul {
     list-style: none;
     display: flex;
-    margin-left: 200px;
+    margin-left: 50px;
     padding-left: 10px;
 }
 
@@ -50,6 +50,10 @@ header ul li:not(:last-child)::after {
 
 header ul li:hover {
     color: #000; /* Change the color on hover */
+}
+
+header ul li a:visited {
+    color: #555;
 }
 
 header .userTag a {
@@ -231,10 +235,6 @@ footer {
     font-size: large;
     display: flex;
     flex-wrap: wrap;
-}
-
-footer div{
-    flex: 1;
 }
 
 footer div:first-child {

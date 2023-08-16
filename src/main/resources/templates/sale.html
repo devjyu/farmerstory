@@ -8,12 +8,66 @@
       header {
         border-bottom: solid 1px lightgrey;
       }
-      .card-container {
+      .category {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: 0 auto;
-        max-width: 1200px; /* Adjust as needed */
+        justify-content: center;
+        margin: 40px 0 20px 0;
+      }
+
+      .category ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .category button {
+        padding: 8px 16px;
+        background-color: #90FC2B;
+        border: none;
+        border-radius: 20px;
+        /* background-color: transparent; */
+        color: #333;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .category button:hover {
+        background-color: #55E61C;
+        color: #fff;
+      }
+
+      .category button:focus {
+        outline: 1px solid #A6E61C;
+      }
+
+      .category button:active{
+        background-color: #55E61C;
+      }
+
+      .cardContainerWrapper {
+        display: grid;
+        gap: 20px;
+        margin: 10px 0 50px 80px;
+        position: relative; /* To make sure the cardNonText is positioned relative to this container */
+      }
+
+      .card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 20px;
+        margin: 10px 0 50px 0px;
+      }
+
+      .cardNonText {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        position: absolute; /* Position it absolutely within the wrapper */
+        top: 0;
+        left: 0;
+        width: 100%;
       }
 
       .card {
@@ -46,21 +100,33 @@
 
       .card-button {
         display: inline-block;
-        background-color: #007bff;
+        background-color: #4CAF50;
         color: #fff;
         padding: 8px 16px;
-        border-radius: 4px;
+        border-radius: 20px;
         text-decoration: none;
         margin-top: 10px;
         transition: background-color 0.3s;
       }
 
       .card-button:hover {
-        background-color: #0056b3;
+        background-color: #55E61C;
+      }
+
+      .card-button:focus {
+        outline: 1px solid #A6E61C;
+      }
+
+      .card-button:active{
+        background-color: #55E61C;
       }
 
       footer {
         border-top: solid 1px lightgray;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 20px 80px;
       }
     </style>
     <title>Document</title>
@@ -75,15 +141,15 @@
       </div>
       <div>
         <ul>
-          <a href="/main">
-            <li>홈</li>
-          </a>
+          <li>
+              <a href="/main">홈</a>
+          </li>
           <li>일기쓰기</li>
           <li>커뮤니티</li>
-          <a href="/sale">
-            <li>작물판매</li>
-          </a>
-        </ul>
+          <li>
+              <a href="/sale">작물판매</a>
+          </li>
+      </ul>
       </div>
       <div class="userTag">
         <ul th:if="${session.dto != null}">
@@ -119,50 +185,50 @@
     </div>
     <div class="category">
       <ul>
-        <li><button onclick="getSaleListByCategoryIdx(5)">곡류</button></li>
-        <li><button onclick="getSaleListByCategoryIdx(4)">과실류</button></li>
-        <li><button>채소</button></li>
-        <li><button>버섯류</button></li>
+        <li>
+          <button id="categoryAllList" onclick="categoryAllList()">전체</button>
+        </li>
+        <li th:each="category : ${resSaleDTOList.categoryList}">
+            <button th:text="${category.name}" th:onclick="getSaleListByCategoryIdx([[${category.idx}]])"></button>
+        </li>
       </ul>
     </div>
-    <div id="cardContainer" class="card-container">
-      <div class="card" th:each="sale : ${resSaleDTOList.saleList}">
-        <img th:src="${sale.saleImg}" alt="Card Image" />
-        <h2 class="card-title" th:text="${sale.title}"></h2>
-        <p class="card-description" th:text="${sale.introduction}"></p>
-        <h5 th:text="${sale.price}"></h5>
-        <a href="#" class="card-button">더 알아보기</a>
+    <div class="cardContainerWrapper">
+      <div id="cardContainer" class="card-container">
+        <div class="card" th:each="sale : ${resSaleDTOList.saleList}">
+          <img th:src="${sale.saleImg}" alt="Card Image" />
+          <h2 class="card-title" th:text="${sale.title}"></h2>
+          <p class="card-description" th:text="${sale.price + '원'}"></p>
+          <!-- <h5 th:text="${sale.price}"></h5> -->
+          <a href="#" class="card-button">더 알아보기</a>
+        </div>
       </div>
     </div>
     <footer>
       <div>
-        <img src="/img/logo_name.png" alt="로고" />
+          <img src="/img/logo_name.png" alt="로고">
       </div>
       <div>
-        <ul>
-          <li>
-            <a href="https://velog.io/@devjyu" target="_blank">
-              <img src="/img/velog_icon.png" alt="velog" />
-            </a>
-          </li>
-
-          <li>
-            <a href="https://github.com/devjyu" target="_blank">
-              <img src="/img/github_icon2.png" alt="github" />
-            </a>
-          </li>
-
-          <li>
-            <a href="">
-              <img src="/img/instagram_icon2.png" alt="instagram" />
-            </a>
-          </li>
-        </ul>
+          <ul>
+              <li>
+                  <a href="https://velog.io/@devjyu" target="_blank">
+                      <img src="/img/velog_icon.png" alt="velog"></li>
+                  </a>
+              <li>
+                  <a href="https://github.com/devjyu" target="_blank">
+                      <img src="/img/github_icon2.png" alt="github"></li>
+                  </a>
+              <li>
+                  <a href="">
+                      <img src="/img/instagram_icon2.png" alt="instagram">    
+                  </a>
+              </li>
+          </ul>
       </div>
       <div>
-        <h5>(C)Copyright.Developer devjyu</h5>
+          <h5>(C)Copyright.Developer devjyu</h5>
       </div>
-    </footer>
+  </footer>
   </body>
   <script>
     // 사이드 메뉴 열기
@@ -180,6 +246,10 @@
       location.replace("/logout");
     };
 
+    const categoryAllList = () => {
+      location.replace("/sale");
+    };
+
     // 카테고리 버튼 누르면 작동될 함수
     const getSaleListByCategoryIdx = (categoryIdx) => {
       fetch(`/api/v1/sale/category/${categoryIdx}`)
@@ -188,22 +258,30 @@
           if (result.code === 0) {
             const cardContainerTag = document.querySelector("#cardContainer");
 
-            cardContainerTag.innerHTML = "";
+            if (result.code === 0 && result.data.saleList.length > 0) {
 
-            result.data.saleList.forEach((sale) => {
-              cardContainerTag.insertAdjacentHTML(
-                "beforeend",
-                `
-                <div class="card">
-                    <img src="${sale.saleImg}" alt="Card Image" />
-                    <h2 class="card-title">${sale.title}</h2>
-                    <p class="card-description">${sale.introduction}</p>
-                    <h5>${sale.price}</h5>
-                    <a href="#" class="card-button">더 알아보기</a>
-                </div>
-                `
-              );
-            });
+              cardContainerTag.innerHTML = "";
+
+              result.data.saleList.forEach((sale) => {
+                cardContainerTag.insertAdjacentHTML(
+                  "beforeend",
+                  `
+                  <div class="card">
+                      <img src="${sale.saleImg}" alt="Card Image" />
+                      <h2 class="card-title">${sale.title}</h2>
+                      <p class="card-description">${sale.price  + '원'}</p>
+                      <a href="#" class="card-button">더 알아보기</a>
+                  </div>
+                  `
+                );
+              });
+            } else {
+              // If there are no cards, display the message
+              cardContainerTag.innerHTML = 
+              `<div class = "cardNonText" style="top: 300px;">
+                <img src="/img/no.png" alt="없어요이미지" style="margin-right: 100px">
+              </div>`;
+            }
           }
         });
     };

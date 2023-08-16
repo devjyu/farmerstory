@@ -2,6 +2,7 @@ package com.example.farmerstroy.domain.sale.dto;
 
 import java.util.List;
 
+import com.example.farmerstroy.model.category.entity.CategoryEntity;
 import com.example.farmerstroy.model.sale.entity.SaleEntity;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +19,14 @@ import lombok.ToString;
 public class ResSaleDTO {
 
     private List<Sale> saleList;
+    private List<Category> categoryList;
 
+    public static ResSaleDTO of(List<SaleEntity> saleEntityList, List<CategoryEntity> categoryEntityList) {
+        return ResSaleDTO.builder()
+                .saleList(Sale.fromEntityList(saleEntityList))
+                .categoryList(Category.fromEntityList(categoryEntityList))
+                .build();
+    }
     public static ResSaleDTO of(List<SaleEntity> saleEntityList) {
         return ResSaleDTO.builder()
                 .saleList(Sale.fromEntityList(saleEntityList))
@@ -35,7 +43,7 @@ public class ResSaleDTO {
         private String introduction;
         private String price;
         private String saleImg;
-        private String categoryName;
+        private Long categoryIdx;
 
         public static Sale fromEntity(SaleEntity saleEntity) {
             return Sale.builder()
@@ -44,7 +52,7 @@ public class ResSaleDTO {
                     .introduction(saleEntity.getIntroduction())
                     .price(saleEntity.getPrice())
                     .saleImg(saleEntity.getSaleImg())
-                    .categoryName(saleEntity.getCategoryEntity().getName())
+                    .categoryIdx(saleEntity.getCategoryEntity().getIdx())
                     .build();
         }
 
@@ -55,5 +63,27 @@ public class ResSaleDTO {
                     .toList();
         }
     }
+    
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    @Getter
+    public static class Category {
+        private Long idx;
+        private String name;
 
+        public static Category fromEntity(CategoryEntity categoryEntity) {
+            return Category.builder()
+            .idx(categoryEntity.getIdx())
+            .name(categoryEntity.getName())
+            .build();
+        }
+
+        public static List<Category> fromEntityList(List<CategoryEntity> categoryEntityList) {
+            return categoryEntityList
+            .stream()
+            .map((categoryEntity) -> Category.fromEntity(categoryEntity))
+            .toList();
+        }
+    }
 }

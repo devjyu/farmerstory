@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.farmerstroy.domain.sale.dto.ResCategoryDTO;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDTO;
 import com.example.farmerstroy.domain.sale.service.SaleService;
 
@@ -22,13 +21,6 @@ public class SaleController {
 
         model.addAttribute("resSaleDTOList", resSaleDTOList);
 
-        return "sale";
-    }
-
-    @GetMapping("/sale")
-    public String salePageByCategoryName(Model model) {
-        ResCategoryDTO categoryList = saleService.getCategoryName();
-        model.addAttribute("categoryList", categoryList);
         return "sale";
     }
 
