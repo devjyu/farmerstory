@@ -54,6 +54,7 @@ public class ResSaleDTO {
                     .introduction(saleEntity.getIntroduction())
                     .price(saleEntity.getPrice())
                     .saleImg(saleEntity.getSaleImg())
+                    .amount(saleEntity.getAmount())
                     .categoryIdx(saleEntity.getCategoryEntity().getIdx())
                     .build();
         }
