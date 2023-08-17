@@ -46,6 +46,9 @@ public class SaleEntity {
     @Column(name = "sale_img", nullable = false)
     private String saleImg;
 
+    @Column(name = "amount")
+    private Integer amount;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx", referencedColumnName = "idx", updatable = false, nullable = false)
     private UserEntity userEntity;

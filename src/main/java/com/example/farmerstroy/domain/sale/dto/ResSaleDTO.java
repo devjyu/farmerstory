@@ -43,6 +43,7 @@ public class ResSaleDTO {
         private String introduction;
         private String price;
         private String saleImg;
+        private Integer amount;
         private Long categoryIdx;
 
         public static Sale fromEntity(SaleEntity saleEntity) {

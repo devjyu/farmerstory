@@ -24,6 +24,7 @@ CREATE TABLE `sale` (
   `introduction` varchar(1000) NOT NULL COMMENT '판매소개',
   `price` varchar(100) NOT NULL COMMENT '판매가격',
   `sale_img` longtext DEFAULT NULL COMMENT '판매이미지',
+  `amount` int DEFAULT NULL COMMENT '판매수량',
   `user_idx` int NOT NULL COMMENT '유저번호',
   `category_idx` int NOT NULL COMMENT '카테고리번호',
   PRIMARY KEY (`idx`),
