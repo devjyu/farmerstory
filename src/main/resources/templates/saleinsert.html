@@ -5,7 +5,68 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/sale.css">
-        <title>Farmer's Story 작물판매</title>
+        <style>
+            .uploadContainer {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 50px;
+            }
+
+            .uploadImg, .uploadText {
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .uploadImg label {
+                display: block;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+
+            .uploadImg input[type="file"] {
+                display: none;
+            }
+
+            .uploadImg #preview {
+                max-width: 100%;
+                height: auto;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                padding: 10px;
+                background-color: white;
+                margin-top: 10px;
+            }
+
+            .uploadText h1 {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+
+            .uploadText label, .uploadText input, .uploadText select {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .uploadText input[type="text"], .uploadText input[type="number"], .uploadText select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            .uploadText button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        </style>
+        <title>Farmer's Story 작물판매등록</title>
     </head>
     <body>
         <header>
@@ -59,8 +120,49 @@
                 <li><a href="javascript:logout();">로그아웃</a></li>
             </ul>
         </div>
-        <div>
-            
+        <div class="uploadContainer">
+            <div class="uploadImg">
+                <label for="saleUploadImg">이미지 등록</label>
+                <div>
+                    <div><input type="file" id="saleUploadImg"></div>
+                </div>
+                <div class="fileInputImg">
+                    <img id="preview" src="" alt="" width="100%">
+                </div>
+            </div>
+            <div class="uploadText">
+                <h1>상품 등록하기</h1>
+                <div>
+                    <label for="saleUploadName">상품 이름</label>
+                    <input type="text" placeholder="상품 이름을 적어주세요">
+                </div>
+                <div>
+                    <label for="saleUploadCategory">카테고리</label>
+                    <select id="saleUploadCategory">
+                        <option value='1'>곡류</option>
+                        <option value='2'>콩류</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="saleUploadTitle">제목</label>
+                    <input type="text" id="saleUploadTitle" placeholder="제목을 적어주세요">
+                </div>
+                <div>
+                    <label for="saleUploadIntroduction">상세 설명</label>
+                    <input type="text" id="saleDetailTableIntroduce" placeholder="상세 설명을 적어주세요">
+                </div>
+                <div>
+                    <label for="saleUploadAmount">수량</label>
+                    <input type="number" name="amount" id="saleUploadAmount" min="1" max="100" placeholder="수량을 입력해주세요">
+                </div>
+                <div>
+                    <label for="saleUploadPrice">가격</label>
+                    <input type="text" id="saleUploadPrice" placeholder="가격을 입력해주세요">
+                </div>
+                <div class="saleDetailBtn">
+                    <button>등록하기</button>
+                </div>
+            </div>
         </div>
         <footer>
             <div>
@@ -105,5 +207,24 @@
         const logout = () => {
             location.replace("/logout");
         };
+
+        // 파일 업로드
+        const fileInput = document.getElementById('saleUploadImg');
+            const preview = document.getElementById('preview');
+
+            fileInput.addEventListener('change', function () {
+                const file = fileInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                    }
+
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.src = '';
+                }
+        });
     </script>
 </html>
