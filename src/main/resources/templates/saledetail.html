@@ -33,11 +33,11 @@
                 padding: 10px;
                 width: 400px;
                 text-align: inherit;
-                margin: 80px 0 0 20px;
+                margin: 70px 0 0 20px;
             }
 
             .saleDetail h1 {
-                font-size: 24px;
+                font-size: 40px;
                 margin-bottom: 15px;
                 color: #333;
             }
@@ -196,8 +196,8 @@
                 <div class="saleDetailImg">
                     <img src="http://via.placeholder.com/400x450" alt="">
                 </div>
-                <div class="saleDetailTableIntroduce">
-                    <h1>상품제목</h1>
+                <div class="saleDetailTableIntroduce" th:each="saleDetail : ${resSaleDetailList.saleDetailList}">
+                    <h1 th:text="${saleDetail.title}"></h1>
                     <table>
                         <caption>
                             <details>
@@ -207,7 +207,7 @@
                         <tbody>
                             <tr>
                                 <th>판매가</th>
-                                <td>50000</td>
+                                <td th:text="${saleDetail.price}"></td>
                             </tr>
                             <tr>
                                 <th>구매수량</th>

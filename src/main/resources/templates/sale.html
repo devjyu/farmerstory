@@ -5,6 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/sale.css">
+    <style>
+      .saleDetail {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 50px;
+      }
+
+      .saleDetail .saleDetailImg {
+        padding: 10px;
+        text-align: center;
+        margin-right: 20px;
+      }
+
+      .saleDetail .saleDetailImg img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        padding: 10px;
+        background-color: white;
+      }
+
+      .saleDetail .saleDetailTableIntroduce{
+        padding: 10px;
+        width: 400px;
+        text-align: inherit;
+        margin: 80px 0 0 20px;
+      }
+
+      .saleDetail h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .saleDetail table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        text-align: left;
+      }
+
+      .saleDetail table caption{
+        text-align: inherit;
+        padding-left: 5px;
+        font-size: 14px;
+      }
+
+      .saleDetail table caption details{
+        padding-bottom: 10px;
+      }
+
+      .saleDetail th,
+      .saleDetail td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .saleDetail th {
+        font-weight: bold;
+        color: #555;
+        width: 30%;
+      }
+
+      .saleDetail input[type="number"] {
+        width: 50px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+      }
+
+      .saleDetail .button-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center; /* Optional: Align buttons vertically */
+        margin-top: 20px; /* Add some spacing between the buttons and the table */
+      }
+
+      .saleDetail .button-container button {
+        width: 30%;
+        background-color: #90FC2B;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .saleDetail .button-container button:hover {
+        background-color: #55E61C;
+      }
+
+      .saleDetail .button-container button:focus {
+        outline: 1px solid #A6E61C;
+      }
+
+      .saleDetail .button-container button:hover {
+        background-color: #55E61C;
+      }
+
+      .saleDetail2 {
+        display: flex;
+        justify-content: center; /* This centers the buttons horizontally */
+        margin-top: 20px; /* Add some spacing */
+      }
+
+      .saleDetail2 button {
+        margin: 0 10px; /* Add some spacing between buttons */
+        padding: 10px 20px;
+        background-color: #90FC2B;
+        color: #333;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .saleDetail2 button:hover {
+        background-color: #55E61C;
+      }
+
+      .saleDetail2 button:focus {
+        outline: 1px solid #A6E61C;
+      }
+    </style>
     <title>Farmer's Story 작물판매</title>
   </head>
   <body>
@@ -60,24 +190,26 @@
         <li><a href="#">작물판매등록</a></li>
       </ul>
     </div>
-    <div class="category">
-      <ul>
-        <li>
-          <button id="categoryAllList" onclick="categoryAllList()">전체</button>
-        </li>
-        <li th:each="category : ${resSaleDTOList.categoryList}">
-            <button th:text="${category.name}" th:onclick="getSaleListByCategoryIdx([[${category.idx}]])"></button>
-        </li>
-      </ul>
-    </div>
-    <div class="cardContainerWrapper">
-      <div id="cardContainer" class="card-container">
-        <div class="card" th:each="sale : ${resSaleDTOList.saleList}">
-          <img th:src="${sale.saleImg}" alt="Card Image" />
-          <h2 class="card-title" th:text="${sale.title}"></h2>
-          <p class="card-description" th:text="${sale.price + '원'}"></p>
-          <!-- <h5 th:text="${sale.price}"></h5> -->
-          <a href="/saledetail" class="card-button">상세보기</a>
+    <div id="MainContainer">
+      <div class="category">
+        <ul>
+          <li>
+            <button id="categoryAllList" onclick="categoryAllList()">전체</button>
+          </li>
+          <li th:each="category : ${resSaleDTOList.categoryList}">
+              <button th:text="${category.name}" th:onclick="getSaleListByCategoryIdx([[${category.idx}]])"></button>
+          </li>
+        </ul>
+      </div>
+      <div class="cardContainerWrapper">
+        <div id="cardContainer" class="card-container">
+          <div class="card" th:each="sale : ${resSaleDTOList.saleList}">
+            <img th:src="${sale.saleImg}" alt="Card Image" />
+            <h2 class="card-title" th:text="${sale.title}"></h2>
+            <p class="card-description" th:text="${sale.price + '원'}"></p>
+            <!-- <h5 th:text="${sale.price}"></h5> -->
+            <button class="card-button" th:onclick="goSaleDetail([[${sale.idx}]])">상세보기</button>
+          </div>
         </div>
       </div>
     </div>
@@ -123,45 +255,119 @@
       location.replace("/logout");
     };
 
-    // 카테고리 전체리스트
+    // 카테고리 전체버튼 클릭시 작동 함수
     const categoryAllList = () => {
       location.replace("/sale");
     };
 
+    // onclick=${goSaleDetail(sale.idx)}
     // 카테고리 버튼 누르면 작동될 함수
     const getSaleListByCategoryIdx = (categoryIdx) => {
       fetch(`/api/v1/sale/category/${categoryIdx}`)
         .then((res) => res.json())
         .then((result) => {
-          if (result.code === 0) {
-            const cardContainerTag = document.querySelector("#cardContainer");
+          const cardContainerTag = document.querySelector("#cardContainer");
 
-            if (result.code === 0 && result.data.saleList.length > 0) {
+          if (result.code === 0 && result.data.saleList.length > 0) {
 
-              cardContainerTag.innerHTML = "";
+            cardContainerTag.innerHTML = "";
 
-              result.data.saleList.forEach((sale) => {
-                cardContainerTag.insertAdjacentHTML(
-                  "beforeend",
-                  `
-                  <div class="card">
-                      <img src="${sale.saleImg}" alt="Card Image" />
-                      <h2 class="card-title">${sale.title}</h2>
-                      <p class="card-description">${sale.price  + '원'}</p>
-                      <a href="saledetail" class="card-button">상세보기</a>
-                  </div>
-                  `
-                );
-              });
-            } else {
-              // If there are no cards, display the message
-              cardContainerTag.innerHTML = 
+            result.data.saleList.forEach((sale) => {
+              cardContainerTag.insertAdjacentHTML(
+                "beforeend",
+                `
+                <div class="card">
+                    <img src="${sale.saleImg}" alt="Card Image" />
+                    <h2 class="card-title">${sale.title}</h2>
+                    <p class="card-description">${sale.price  + '원'}</p>
+                    <button class="card-button" onclick="goSaleDetail(${sale.idx})">상세보기</button>
+                </div>
+                `
+              );
+            });
+          } else {
+            // If there are no cards, display the message
+            cardContainerTag.innerHTML = 
               `<div class = "cardNonText" style="top: 300px;">
                 <img src="/img/no.png" alt="없어요이미지" style="margin-right: 100px">
               </div>`;
-            }
           }
         });
     };
+
+    // saleIdX에 따른 상세페이지 이동 함수
+    const goSaleDetail = (saleIdx) => {
+      location.href = "/sale/" + saleIdx  ;
+    }
+
+    // // 틀린 방법은 아니지만 뒤로가기 할 시 상세페이지가 아니라 메인페이지로 간다.
+    // // 상세보기 버튼 누르면 작됭될 함수
+    // const getSaleListBySaleIdx = (saleIdx) => {
+    //   fetch(`/api/v1/sale/${saleIdx}`)
+    //     .then((response) => response.json())
+    //     .then((result) => {
+    //       if (result.code === 0) {
+    //         const MainContainer = document.querySelector("#MainContainer");
+
+    //         MainContainer.innerHTML = "";
+
+    //         result.data.saleDetailList.forEach((saleDetail) => {
+    //           MainContainer.insertAdjacentHTML(
+    //             "beforeend",
+    //             `
+    //             <div class="saleDetail">
+    //               <div class="saleDetailImg">
+    //                 <img src="http://via.placeholder.com/400x450" alt="">
+    //               </div>
+    //               <div class="saleDetailTableIntroduce">
+    //                 <h1>상품제목</h1>
+    //                 <table>
+    //                   <caption>
+    //                     <details>
+    //                       <summary>상품정보</summary>
+    //                     </details>
+    //                   </caption>
+    //                   <tbody>
+    //                     <tr>
+    //                       <th>판매가</th>
+    //                       <td>50000</td>
+    //                     </tr>
+    //                     <tr>
+    //                       <th>구매수량</th>
+    //                       <td>
+    //                         <input type="number" value="1" min="1">&nbsp;Box
+    //                       </td>
+    //                     </tr>
+    //                     <tr>
+    //                       <th>배송비</th>
+    //                       <td>무료배송</td>
+    //                     </tr>
+    //                     <tr>
+    //                       <th>결제금액</th>
+    //                       <td>50000</td>
+    //                     </tr>
+    //                   </tbody>
+    //                 </table>
+    //                 <div class="saleDetailBtn">
+    //                   <div class="button-container">
+    //                     <button>구매하기</button>
+    //                     <button>담기</button>
+    //                   </div>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //             <div class="saleDetail2">
+    //               <div>
+    //                 <button>소개</button>
+    //                 <button>리뷰</button>
+    //                 <button>문의</button>
+    //               </div>
+    //             </div>
+    //             `
+    //           );
+    //         });
+    //       }
+    //     });
+    // };
   </script>
 </html>

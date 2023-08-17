@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.farmerstroy.domain.sale.dto.ResSaleDTO;
+import com.example.farmerstroy.domain.sale.dto.ResSaleDetailDTO;
 import com.example.farmerstroy.model.category.entity.CategoryEntity;
 import com.example.farmerstroy.model.category.repository.CategoryRepository;
 import com.example.farmerstroy.model.sale.entity.SaleEntity;
@@ -28,4 +29,10 @@ public class SaleService {
         ResSaleDTO dto = ResSaleDTO.of(saleEntityList, categoryNameList);
         return dto ;
     }
-}
+
+    public ResSaleDetailDTO getSaleDetailData(Long saleIdx) {
+        List<SaleEntity> saleDetailList = saleRepository.findByIdx(saleIdx);
+        ResSaleDetailDTO dto = ResSaleDetailDTO.of(saleDetailList);
+        return dto;
+    }
+} 
