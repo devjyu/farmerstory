@@ -21,10 +21,10 @@ VALUES  (1, '곡류'),
         (11, '버섯류');
 
 -- 판매테이블
-INSERT INTO `sale` (`title`, `introduction`, `price`, `sale_img`, `amount`, `user_idx`, `category_idx`)
-VALUES  ('채소 팔아요', '싱싱한 채소 있어요!!', '3,000', 'http://via.placeholder.com/320x240',1, 2, 4),
-        ('과일 팔아요', '원숭이가 좋아하는 바나나가 있어요!!', '5,000', 'http://via.placeholder.com/320x240',2, 4, 5),
-        ('쌀 팔아요', '임금님 쌀 있어요!!', '10,000', 'http://via.placeholder.com/320x240',1, 2, 1),
-        ('국내산 양송이', '아주 죽여줍니다', '8,000', 'http://via.placeholder.com/320x240',2, 4, 11),
-        ('초록초록 완두콩', '고소한 완두콩입니다.', '2,000', 'http://via.placeholder.com/320x240',2, 2, 2),
-        ('직접 키운 장미', '모든 여자들이 넘어올 수 있어요', '1,000', 'http://via.placeholder.com/320x240',1, 4, 10);
+INSERT INTO `sale` (`name`, `title`, `introduction`, `price`, `sale_img`, `amount`, `user_idx`, `category_idx`)
+VALUES  ('상추', '채소 팔아요', '싱싱한 채소 있어요!!', '3,000', 'http://via.placeholder.com/320x240',1, 2, 4),
+        ('바나나', '과일 팔아요', '원숭이가 좋아하는 바나나가 있어요!!', '5,000', 'http://via.placeholder.com/320x240',2, 4, 5),
+        ('햇쌀', '쌀 팔아요', '임금님 쌀 있어요!!', '10,000', 'http://via.placeholder.com/320x240',1, 2, 1),
+        ('양송이', '국내산 양송이', '아주 죽여줍니다', '8,000', 'http://via.placeholder.com/320x240',2, 4, 11),
+        ('완두콩', '초록초록 완두콩', '고소한 완두콩입니다.', '2,000', 'http://via.placeholder.com/320x240',2, 2, 2),
+        ('장미', '직접 키운 장미', '모든 여자들이 넘어올 수 있어요', '1,000', 'http://via.placeholder.com/320x240',1, 4, 10);

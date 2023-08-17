@@ -34,6 +34,9 @@ public class SaleEntity {
     @Column(name = "idx", nullable = false, unique = true)
     private Long idx;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "title", nullable = false)
     private String title;
 

@@ -40,6 +40,7 @@ public class ResSaleDTO {
     @Getter
     public static class Sale {
         private Long idx;
+        private String name;
         private String title;
         private String introduction;
         private String price;
@@ -50,6 +51,7 @@ public class ResSaleDTO {
         public static Sale fromEntity(SaleEntity saleEntity) {
             return Sale.builder()
                     .idx(saleEntity.getIdx())
+                    .name(saleEntity.getName())
                     .title(saleEntity.getTitle())
                     .introduction(saleEntity.getIntroduction())
                     .price(saleEntity.getPrice())

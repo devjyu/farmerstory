@@ -20,6 +20,7 @@ CREATE TABLE `category` (
 -- farmerstory.sale definition
 CREATE TABLE `sale` (
   `idx` int NOT NULL AUTO_INCREMENT COMMENT '판매글번호',
+  `name` varchar(100) NOT NULL COMMENT '상품이름',
   `title` varchar(100) NOT NULL COMMENT '판매글제목',
   `introduction` varchar(1000) NOT NULL COMMENT '판매소개',
   `price` varchar(100) NOT NULL COMMENT '판매가격',
