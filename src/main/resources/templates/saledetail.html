@@ -7,20 +7,20 @@
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/sale.css">
         <style>
-            .product-detail {
+            .saleDetail {
                 display: flex;
                 justify-content: center;
                 align-items: flex-start;
                 padding: 50px;
             }
 
-            .product-detail .saleDetailImg {
+            .saleDetail .saleDetailImg {
                 padding: 10px;
                 text-align: center;
                 margin-right: 20px;
             }
 
-            .product-detail .saleDetailImg img {
+            .saleDetail .saleDetailImg img {
                 max-width: 100%;
                 height: auto;
                 border: 1px solid #ddd;
@@ -29,49 +29,49 @@
                 background-color: white;
             }
 
-            .product-detail .saleDetailTableIntroduce{
+            .saleDetail .saleDetailTableIntroduce{
                 padding: 10px;
                 width: 400px;
                 text-align: inherit;
-                margin-left: 20px;
+                margin: 80px 0 0 20px;
             }
 
-            .product-detail h1 {
+            .saleDetail h1 {
                 font-size: 24px;
                 margin-bottom: 15px;
                 color: #333;
             }
 
-            .product-detail table {
+            .saleDetail table {
                 width: 100%;
                 border-collapse: collapse;
                 margin: 20px 0;
                 text-align: left;
             }
 
-            .product-detail table caption{
+            .saleDetail table caption{
                 text-align: inherit;
                 padding-left: 5px;
                 font-size: 14px;
             }
 
-            .product-detail table caption details{
+            .saleDetail table caption details{
                 padding-bottom: 10px;
             }
 
-            .product-detail th,
-            .product-detail td {
+            .saleDetail th,
+            .saleDetail td {
                 padding: 10px;
                 border-bottom: 1px solid #ddd;
             }
 
-            .product-detail th {
+            .saleDetail th {
                 font-weight: bold;
                 color: #555;
                 width: 30%;
             }
 
-            .product-detail input[type="number"] {
+            .saleDetail input[type="number"] {
                 width: 50px;
                 padding: 5px;
                 border: 1px solid #ddd;
@@ -79,35 +79,61 @@
                 text-align: center;
             }
 
-            .product-detail .button-container {
+            .saleDetail .button-container {
                 display: flex;
                 justify-content: space-around;
                 align-items: center; /* Optional: Align buttons vertically */
                 margin-top: 20px; /* Add some spacing between the buttons and the table */
             }
 
-            .product-detail .button-container button {
+            .saleDetail .button-container button {
                 width: 30%;
                 background-color: #90FC2B;
                 color: #333;
                 border: none;
                 padding: 10px 20px;
-                border-radius: 4px;
+                border-radius: 30px;
                 cursor: pointer;
                 font-size: 16px;
                 transition: background-color 0.3s ease;
             }
             
-            .product-detail .button-container button:hover {
+            .saleDetail .button-container button:hover {
                 background-color: #55E61C;
             }
 
-            .product-detail .button-container button:focus {
+            .saleDetail .button-container button:focus {
                 outline: 1px solid #A6E61C;
             }
 
-            .product-detail .button-container button:hover {
+            .saleDetail .button-container button:hover {
                 background-color: #55E61C;
+            }
+
+            .saleDetail2 {
+                display: flex;
+                justify-content: center; /* This centers the buttons horizontally */
+                margin-top: 20px; /* Add some spacing */
+            }
+
+            .saleDetail2 button {
+                margin: 0 10px; /* Add some spacing between buttons */
+                padding: 10px 20px;
+                background-color: #90FC2B;
+                color: #333;
+                border: none;
+                border-radius: 30px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+
+            .saleDetail2 button:hover {
+                background-color: #55E61C;
+            }
+
+            .saleDetail2 button:focus {
+                outline: 1px solid #A6E61C;
             }
         </style>
         <title>Document</title>
@@ -166,7 +192,7 @@
         </div>
 
         <body>
-            <div class="product-detail">
+            <div class="saleDetail">
                 <div class="saleDetailImg">
                     <img src="http://via.placeholder.com/400x450" alt="">
                 </div>
@@ -205,6 +231,13 @@
                             <button>담기</button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="saleDetail2">
+                <div>
+                    <button>소개</button>
+                    <button>리뷰</button>
+                    <button>문의</button>
                 </div>
             </div>
         </body>
