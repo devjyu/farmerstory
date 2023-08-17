@@ -32,6 +32,18 @@ CREATE TABLE `sale` (
   FOREIGN KEY (`user_idx`) REFERENCES `user` (`idx`)
 );
 
+-- farmerstory.review definition
+CREATE TABLE `review` (
+  `idx` int NOT NULL AUTO_INCREMENT COMMENT 'Review Post Number',
+  `content` varchar(1000) NOT NULL COMMENT 'Review Content',
+  `create_date` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Review Creation Date',
+  `user_idx` int NOT NULL COMMENT 'User Number who wrote the Review',
+  `sale_idx` int NOT NULL COMMENT 'Sale Post Number',
+  PRIMARY KEY (`idx`),
+  FOREIGN KEY (`user_idx`) REFERENCES `user` (`idx`),
+  FOREIGN KEY (`sale_idx`) REFERENCES `sale` (`idx`)
+);
+
 -- -- farmerstory.diary definition
 -- CREATE TABLE `diary` (
 --   `idx` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Diary Number',
@@ -71,18 +83,5 @@ CREATE TABLE `sale` (
 -- );
 
 
--- -- farmerstory.review definition
--- CREATE TABLE `review` (
---   `idx` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Review Post Number',
---   `content` varchar(100) NOT NULL COMMENT 'Review Content',
---   `create_date` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Review Creation Date',
---   `user_idx` int(11) NOT NULL COMMENT 'User Number who wrote the Review',
---   `sale_idx` int(11) NOT NULL COMMENT 'Sale Post Number',
---   PRIMARY KEY (`idx`),
---   KEY `review_FK` (`user_idx`),
---   KEY `review_FK_1` (`sale_idx`),
---   CONSTRAINT `review_FK` FOREIGN KEY (`user_idx`) REFERENCES `user` (`idx`),
---   CONSTRAINT `review_FK_1` FOREIGN KEY (`sale_idx`) REFERENCES `sale` (`idx`)
--- );
 
 
