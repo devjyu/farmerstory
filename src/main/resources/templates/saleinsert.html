@@ -50,7 +50,7 @@
                 </ul>
             </div>
         </header>
-        <div id="sideMenu" class="side-menu">
+        <div id="sideMenu" class="side-menu" th:if="${session.dto != null}">
             <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
             <ul class="side-menu-links">
                 <li><a href="/saleinsert" th:if="${session.dto.user.authority != 2}">상품등록하기</a></li>
