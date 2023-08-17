@@ -35,8 +35,7 @@ public class LoginUserDTO {
         private String password;
         // private String email;
         private String profileImg;
-        // private Integer authority;
-        // private List<>
+        private Integer authority;
 
         public static User fromEntity(UserEntity userEntity){
             return User.builder()
@@ -45,6 +44,7 @@ public class LoginUserDTO {
             .id(userEntity.getId())
             .password(userEntity.getPassword())
             .profileImg(userEntity.getProfileImg())
+            .authority(userEntity.getAuthority())
             .build();
         }
     }

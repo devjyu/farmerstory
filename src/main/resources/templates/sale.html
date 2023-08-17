@@ -54,6 +54,7 @@
     <div id="sideMenu" class="side-menu">
       <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
       <ul class="side-menu-links">
+        <li th:if="${session.dto.user.authority = 1}"><a href="#">작물판매등록</a></li>
         <li><a href="#">개인정보수정</a></li>
         <li><a href="#">장바구니</a></li>
         <li><a href="javascript:logout();">로그아웃</a></li>
@@ -76,7 +77,7 @@
           <h2 class="card-title" th:text="${sale.title}"></h2>
           <p class="card-description" th:text="${sale.price + '원'}"></p>
           <!-- <h5 th:text="${sale.price}"></h5> -->
-          <a href="#" class="card-button">더 알아보기</a>
+          <a href="/saledetail" class="card-button">상세보기</a>
         </div>
       </div>
     </div>
@@ -147,7 +148,7 @@
                       <img src="${sale.saleImg}" alt="Card Image" />
                       <h2 class="card-title">${sale.title}</h2>
                       <p class="card-description">${sale.price  + '원'}</p>
-                      <a href="#" class="card-button">더 알아보기</a>
+                      <a href="saledetail" class="card-button">상세보기</a>
                   </div>
                   `
                 );
