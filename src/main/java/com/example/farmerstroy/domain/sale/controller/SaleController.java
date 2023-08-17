@@ -29,10 +29,15 @@ public class SaleController {
 
     // 판매 상세페이지
     @GetMapping("/sale/{saleIdx}")
-        public String saleDetail(@PathVariable Long saleIdx, Model model){
+    public String saleDetail(@PathVariable Long saleIdx, Model model){
         ResSaleDetailDTO resSaleDetailList = saleService.getSaleDetailData(saleIdx);
         model.addAttribute("resSaleDetailList", resSaleDetailList);
         return "saledetail";
+    }
+
+    @GetMapping("/saleinsert")
+    public String saleInsert() {
+        return "saleinsert";
     }
 
 }
