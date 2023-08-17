@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/main.css" />
+        <link rel="stylesheet" href="/css/sale.css">
+        <style>
+            .product-detail {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 50px;
+            }
+
+            .product-detail .saleDetailImg {
+                padding: 10px;
+                text-align: center;
+                margin-right: 20px;
+            }
+
+            .product-detail .saleDetailImg img {
+                max-width: 100%;
+                height: auto;
+                border: 1px solid #ddd;
+                border-radius: 30px;
+                padding: 10px;
+                background-color: white;
+            }
+
+            .product-detail .saleDetailTableIntroduce{
+                padding: 10px;
+                width: 400px;
+                text-align: inherit;
+                margin-left: 20px;
+            }
+
+            .product-detail h1 {
+                font-size: 24px;
+                margin-bottom: 15px;
+                color: #333;
+            }
+
+            .product-detail table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+                text-align: left;
+            }
+
+            .product-detail table caption{
+                text-align: inherit;
+                padding-left: 5px;
+                font-size: 14px;
+            }
+
+            .product-detail table caption details{
+                padding-bottom: 10px;
+            }
+
+            .product-detail th,
+            .product-detail td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .product-detail th {
+                font-weight: bold;
+                color: #555;
+                width: 30%;
+            }
+
+            .product-detail input[type="number"] {
+                width: 50px;
+                padding: 5px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                text-align: center;
+            }
+
+            .product-detail .button-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: center; /* Optional: Align buttons vertically */
+                margin-top: 20px; /* Add some spacing between the buttons and the table */
+            }
+
+            .product-detail .button-container button {
+                width: 30%;
+                background-color: #90FC2B;
+                color: #333;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+            
+            .product-detail .button-container button:hover {
+                background-color: #55E61C;
+            }
+
+            .product-detail .button-container button:focus {
+                outline: 1px solid #A6E61C;
+            }
+
+            .product-detail .button-container button:hover {
+                background-color: #55E61C;
+            }
+        </style>
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- <img th:src="${session.dto.user.profileImg}" alt="프로필"> -->
+        <header>
+            <div>
+                <a href="/main">
+                    <img src="/img/logo.png" alt="로고" />
+                </a>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <a href="/main">홈</a>
+                    </li>
+                    <li>일기쓰기</li>
+                    <li>커뮤니티</li>
+                    <li>
+                        <a href="/sale">작물판매</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="userTag">
+                <ul th:if="${session.dto != null}">
+                    <li>
+                        <div class="userProfile">
+                            <img th:src="${session.dto.user.profileImg}" alt="프로필" />
+                        </div>
+                    </li>
+                    <li class="userNicknameText">
+                        <span th:text="${session.dto.user.nickname}"></span>님 환영합니다!
+                    </li>
+                    <li class="sideMenuLi">
+                        <span onclick="openSideMenu()">&#9776;</span>
+                    </li>
+                </ul>
+                <ul th:if="${session.dto == null}">
+                    <a href="/login">
+                        <li class="userTagText">로그인</li>
+                    </a>
+                    <a href="/join">
+                        <li class="userTagText">회원가입</li>
+                    </a>
+                </ul>
+            </div>
+        </header>
+        <div id="sideMenu" class="side-menu">
+            <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
+            <ul class="side-menu-links">
+                <li><a href="#">개인정보수정</a></li>
+                <li><a href="#">장바구니</a></li>
+                <li><a href="javascript:logout();">로그아웃</a></li>
+            </ul>
+        </div>
+
+        <body>
+            <div class="product-detail">
+                <div class="saleDetailImg">
+                    <img src="http://via.placeholder.com/400x450" alt="">
+                </div>
+                <div class="saleDetailTableIntroduce">
+                    <h1>상품제목</h1>
+                    <table>
+                        <caption>
+                            <details>
+                                <summary>상품정보</summary>
+                            </details>
+                        </caption>
+                        <tbody>
+                            <tr>
+                                <th>판매가</th>
+                                <td>50000</td>
+                            </tr>
+                            <tr>
+                                <th>구매수량</th>
+                                <td>
+                                    <input type="number" value="1" min="1">&nbsp;Box
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>배송비</th>
+                                <td>무료배송</td>
+                            </tr>
+                            <tr>
+                                <th>결제금액</th>
+                                <td>50000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="saleDetailBtn">
+                        <div class="button-container">
+                            <button>구매하기</button>
+                            <button>담기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+        <footer>
+            <div>
+                <img src="/img/logo_name.png" alt="로고">
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <a href="https://velog.io/@devjyu" target="_blank">
+                            <img src="/img/velog_icon.png" alt="velog">
+                    </li>
+                    </a>
+                    <li>
+                        <a href="https://github.com/devjyu" target="_blank">
+                            <img src="/img/github_icon2.png" alt="github">
+                    </li>
+                    </a>
+                    <li>
+                        <a href="">
+                            <img src="/img/instagram_icon2.png" alt="instagram">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h5>(C)Copyright.Developer devjyu</h5>
+            </div>
+        </footer>
+    </body>
+    <script>
+        // 사이드 메뉴 열기
+        function openSideMenu() {
+            document.getElementById("sideMenu").classList.add("open");
+        }
+
+        // 사이드 메뉴 닫기
+        function closeSideMenu() {
+            document.getElementById("sideMenu").classList.remove("open");
+        }
+
+        // 로그아웃하기
+        const logout = () => {
+            location.replace("/logout");
+        };
+    </script>
+
+</html>
