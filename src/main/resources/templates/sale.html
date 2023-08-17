@@ -5,136 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/sale.css">
-    <style>
-      .saleDetail {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 50px;
-      }
-
-      .saleDetail .saleDetailImg {
-        padding: 10px;
-        text-align: center;
-        margin-right: 20px;
-      }
-
-      .saleDetail .saleDetailImg img {
-        max-width: 100%;
-        height: auto;
-        border: 1px solid #ddd;
-        border-radius: 30px;
-        padding: 10px;
-        background-color: white;
-      }
-
-      .saleDetail .saleDetailTableIntroduce{
-        padding: 10px;
-        width: 400px;
-        text-align: inherit;
-        margin: 80px 0 0 20px;
-      }
-
-      .saleDetail h1 {
-        font-size: 24px;
-        margin-bottom: 15px;
-        color: #333;
-      }
-
-      .saleDetail table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        text-align: left;
-      }
-
-      .saleDetail table caption{
-        text-align: inherit;
-        padding-left: 5px;
-        font-size: 14px;
-      }
-
-      .saleDetail table caption details{
-        padding-bottom: 10px;
-      }
-
-      .saleDetail th,
-      .saleDetail td {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      .saleDetail th {
-        font-weight: bold;
-        color: #555;
-        width: 30%;
-      }
-
-      .saleDetail input[type="number"] {
-        width: 50px;
-        padding: 5px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-align: center;
-      }
-
-      .saleDetail .button-container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center; /* Optional: Align buttons vertically */
-        margin-top: 20px; /* Add some spacing between the buttons and the table */
-      }
-
-      .saleDetail .button-container button {
-        width: 30%;
-        background-color: #90FC2B;
-        color: #333;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-      }
-      
-      .saleDetail .button-container button:hover {
-        background-color: #55E61C;
-      }
-
-      .saleDetail .button-container button:focus {
-        outline: 1px solid #A6E61C;
-      }
-
-      .saleDetail .button-container button:hover {
-        background-color: #55E61C;
-      }
-
-      .saleDetail2 {
-        display: flex;
-        justify-content: center; /* This centers the buttons horizontally */
-        margin-top: 20px; /* Add some spacing */
-      }
-
-      .saleDetail2 button {
-        margin: 0 10px; /* Add some spacing between buttons */
-        padding: 10px 20px;
-        background-color: #90FC2B;
-        color: #333;
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-      }
-
-      .saleDetail2 button:hover {
-        background-color: #55E61C;
-      }
-
-      .saleDetail2 button:focus {
-        outline: 1px solid #A6E61C;
-      }
-    </style>
     <title>Farmer's Story 작물판매</title>
   </head>
   <body>
@@ -184,10 +54,10 @@
     <div id="sideMenu" class="side-menu">
       <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
       <ul class="side-menu-links">
-        <li><a href="javascript:logout();">로그아웃</a></li>
+        <li><a href="#" th:if="${session.dto.user.authority != 2}">상품등록하기</a></li>
         <li><a href="#">개인정보수정</a></li>
         <li><a href="#">장바구니</a></li>
-        <li><a href="#">작물판매등록</a></li>
+        <li><a href="javascript:logout();">로그아웃</a></li>
       </ul>
     </div>
     <div id="MainContainer">
