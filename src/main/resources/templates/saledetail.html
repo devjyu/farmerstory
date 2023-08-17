@@ -191,57 +191,54 @@
                 <li><a href="javascript:logout();">로그아웃</a></li>
             </ul>
         </div>
-
-        <body>
-            <div class="saleDetail">
-                <div class="saleDetailImg">
-                    <img src="http://via.placeholder.com/400x450" alt="">
-                </div>
-                <div class="saleDetailTableIntroduce" th:each="saleDetail : ${resSaleDetailList.saleDetailList}">
-                    <h1 th:text="${saleDetail.title}"></h1>
-                    <table>
-                        <caption>
-                            <details>
-                                <summary>상품정보</summary>
-                            </details>
-                        </caption>
-                        <tbody>
-                            <tr>
-                                <th>판매가</th>
-                                <td th:text="${saleDetail.price}"></td>
-                            </tr>
-                            <tr>
-                                <th>구매수량</th>
-                                <td>
-                                    <input type="number" value="1" min="1">&nbsp;Box
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>배송비</th>
-                                <td>무료배송</td>
-                            </tr>
-                            <tr>
-                                <th>결제금액</th>
-                                <td>50000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="saleDetailBtn">
-                        <div class="button-container">
-                            <button>구매하기</button>
-                            <button>담기</button>
-                        </div>
+        <div class="saleDetail">
+            <div class="saleDetailImg">
+                <img src="http://via.placeholder.com/400x450" alt="">
+            </div>
+            <div class="saleDetailTableIntroduce" th:each="saleDetail : ${resSaleDetailList.saleDetailList}">
+                <h1 th:text="${saleDetail.title}"></h1>
+                <table>
+                    <caption>
+                        <details>
+                            <summary>상품정보</summary>
+                        </details>
+                    </caption>
+                    <tbody>
+                        <tr>
+                            <th>판매가</th>
+                            <td th:text="${saleDetail.price}"></td>
+                        </tr>
+                        <tr>
+                            <th>구매수량</th>
+                            <td>
+                                <input type="number" value="1" min="1">&nbsp;Box
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>배송비</th>
+                            <td>무료배송</td>
+                        </tr>
+                        <tr>
+                            <th>결제금액</th>
+                            <td>50000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="saleDetailBtn">
+                    <div class="button-container">
+                        <button>구매하기</button>
+                        <button>담기</button>
                     </div>
                 </div>
             </div>
-            <div class="saleDetail2">
-                <div>
-                    <button>소개</button>
-                    <button>리뷰</button>
-                    <button>문의</button>
-                </div>
+        </div>
+        <div class="saleDetail2">
+            <div>
+                <button>소개</button>
+                <button>리뷰</button>
+                <button>문의</button>
             </div>
-        </body>
+        </div>
         <footer>
             <div>
                 <img src="/img/logo_name.png" alt="로고">
