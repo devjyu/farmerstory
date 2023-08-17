@@ -15,6 +15,7 @@ public class SaleController {
 
     private final SaleService saleService;
     
+    // 판매페이지
     @GetMapping("/sale")
     public String salePage(Model model){
         ResSaleDTO resSaleDTOList = saleService.getSaleData();

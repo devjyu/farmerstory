@@ -21,6 +21,7 @@ public class SaleService {
     private final SaleRepository saleRepository;
     private final CategoryRepository categoryRepository;
 
+    // 판매 페이지 전체 게시글리스트, 카테고리 전체 리스트
     public ResSaleDTO getSaleData() {
         List<SaleEntity> saleEntityList = saleRepository.findAll();
         List<CategoryEntity> categoryNameList = categoryRepository.findAll();

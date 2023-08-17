@@ -8,16 +8,19 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class AuthController {
 
+    // 회원가입
     @GetMapping("/join")
     public String joinPage() {
         return "join";
     }
 
+    // 로그인
     @GetMapping("/login")
     public String loginPage(){
         return "login";
     }
 
+    // 로그아웃
     @GetMapping("/logout")
     public String logoutPage(HttpSession session) {
         System.out.println("통과");

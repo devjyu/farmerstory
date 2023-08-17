@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class MainController {
 
+    // 메인페이지
     @GetMapping("/main")
     public String mainPage(HttpSession session) {
         // if (session.getAttribute("dto") == null) {

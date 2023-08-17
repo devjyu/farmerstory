@@ -201,6 +201,7 @@ public class AuthServiceApiV1 {
                 }
         }
 
+        // 유저가 농부 또는 일반인을 구별할때
         public ResponseEntity<?> farmerOrPublic(Integer authority) {
                 if (authority == null) {
                         return new ResponseEntity<>(

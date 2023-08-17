@@ -21,7 +21,7 @@ public class SaleServiceApiV1 {
 
     private final SaleRepository saleRepository;
 
-    // 
+    // 판매페이지 게시글 카테고리 idx로 게시글 조회
     public ResponseEntity<?> getSaleListByCategoryIdx(Long categoryIdx) {
         List<SaleEntity> saleEntityList = saleRepository.findByCategoryEntity_Idx(categoryIdx);
         ResSaleDTO dto = ResSaleDTO.of(saleEntityList);

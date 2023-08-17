@@ -15,7 +15,9 @@ import lombok.ToString;
 @Builder
 @Getter
 @ToString
+// 판매 상세페이지 DTO
 public class ResSaleDetailDTO {
+
     private List<Sale> saleDetailList;
 
     public static ResSaleDetailDTO of(List<SaleEntity> saleEntityList) {
