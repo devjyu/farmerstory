@@ -105,27 +105,7 @@ public class AuthServiceApiV1 {
 
                         profileImg = "data:" + dto.getProfileImg().getContentType() + ";base64," + imgBase64;
                 } else {
-                        profileImg = "default.png";
-
-                       //  ClassPathResource defaultImageResource = new ClassPathResource("/img/default_profile.png");
-                        
-                        // byte[] defaultImageBytes = FileUtils.readFileToByteArray(defaultImageResource.getFile());
-
-                      //  byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/default_img.png"));
-                        //File defaultImageFile = new File(getClass().getResource("img/default_profile.png").getFile());
-                        // byte[] defaultImageBytes = new byte[(int) defaultImageResource];
-                        // String imgBase64 = Base64.getEncoder().encodeToString(defaultImageBytes);
-                        // profileImg = "data:" + defaultImageFile + ";base64," + imgBase64;
-
-
-
-
-                        // FileInputStream fis = new FileInputStream(defaultImageFile);
-                        // fis.read(defaultImageBytes);
-                        // fis.close();
-                        // String defaultImgBase64 = Base64.getEncoder().encodeToString(defaultImageBytes);
-                        
-                        // profileImg = "data:image/png;base64," + defaultImgBase64;
+                        profileImg = "http://via.placeholder.com/320x240";
                 }
                 
                 // 없으면 회원가입 처리
