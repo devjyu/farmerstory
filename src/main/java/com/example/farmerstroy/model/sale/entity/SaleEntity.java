@@ -44,7 +44,7 @@ public class SaleEntity {
     private String introduction;
 
     @Column(name = "price", nullable = false)
-    private String price;
+    private Integer price;
 
     @Column(name = "sale_img", nullable = false)
     private String saleImg;

@@ -53,8 +53,7 @@ public class SaleServiceApiV1 {
             dto.getName() == null || dto.getName().equals("") ||
             dto.getTitle() == null || dto.getTitle().equals("") ||
             dto.getIntroduction() == null || dto.getIntroduction().equals("") ||
-            dto.getPrice() == null || dto.getPrice().equals("") ||
-            dto.getAmount() < 0
+            dto.getPrice() < 0 || dto.getAmount() < 0
         ) {
             throw new BadRequestException("정보를 입력해주세요");
         }

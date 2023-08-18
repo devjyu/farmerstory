@@ -32,7 +32,7 @@ public class ReqSaleInsertDTO {
 
     @NotBlank(message = "금액을 입력해주세요")
     @Size(min = 1, max = 1000000)
-    private String price;
+    private Integer price;
 
     @NotBlank(message = "수량을 입력해주세요")
     @Size(min = 1, max = 300)

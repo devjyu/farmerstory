@@ -76,7 +76,7 @@
           <div class="card" th:each="sale : ${resSaleDTOList.saleList}">
             <img th:src="${sale.saleImg}" alt="Card Image" />
             <h2 class="card-title" th:text="${sale.title}"></h2>
-            <p class="card-description" th:text="${sale.price + '원'}"></p>
+            <p class="card-description" th:text="${sale.priceStr + '원'}"></p>
             <!-- <h5 th:text="${sale.price}"></h5> -->
             <button class="card-button" th:onclick="goSaleDetail([[${sale.idx}]])">상세보기</button>
           </div>

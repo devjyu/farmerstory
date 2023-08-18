@@ -23,7 +23,7 @@ CREATE TABLE `sale` (
   `name` varchar(100) NOT NULL COMMENT '상품이름',
   `title` varchar(100) NOT NULL COMMENT '판매글제목',
   `introduction` varchar(1000) NOT NULL COMMENT '판매소개',
-  `price` varchar(100) NOT NULL COMMENT '판매가격',
+  `price` int NOT NULL COMMENT '판매가격',
   `sale_img` longtext DEFAULT NULL COMMENT '판매이미지',
   `amount` int NOT NULL COMMENT '판매수량',
   `user_idx` int NOT NULL COMMENT '유저번호',

@@ -80,12 +80,13 @@
                         </tr>
                         <tr>
                             <th>판매가</th>
-                            <td th:text="${saleDetail.price}"></td>
+                            <td th:text="${saleDetail.priceStr + '원'}"></td>
                         </tr>
                         <tr>
                             <th>구매수량</th>
                             <td>
-                                <input type="number" value="1" min="1">&nbsp;Box
+                                <input type="hidden" id="price" th:value="${saleDetail.price}">
+                                <input id="amount" type="number" value="0" min="0" onchange="pricePayment()">&nbsp;Box
                             </td>
                         </tr>
                         <tr>
@@ -93,8 +94,8 @@
                             <td>무료배송</td>
                         </tr>
                         <tr>
-                            <th>결제금액</th>
-                            <td>50000</td>
+                            <th>총 결제금액</th>
+                            <td id="allPrice">0</td>
                         </tr>
                     </tbody>
                 </table>
@@ -166,6 +167,15 @@
         const logout = () => {
             location.replace("/logout");
         };
-    </script>
 
+        // 수량 체크 이벤트
+        // document.addEventListener('DOMContentLoaded', () => )
+
+        const pricePayment = () => {
+            const tempAmount = document.querySelector("#amount");
+            const price = document.querySelector("#price");
+            document.querySelector("#allPrice").innerHTML = (Number(tempAmount.value) * Number(price.value)).toLocaleString() + "원";
+        }
+
+    </script>
 </html>

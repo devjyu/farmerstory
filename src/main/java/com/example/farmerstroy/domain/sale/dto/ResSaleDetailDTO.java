@@ -1,5 +1,6 @@
 package com.example.farmerstroy.domain.sale.dto;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import com.example.farmerstroy.model.sale.entity.SaleEntity;
@@ -35,7 +36,8 @@ public class ResSaleDetailDTO {
         private String name;
         private String title;
         private String introduction;
-        private String price;
+        private Integer price;
+        private String priceStr;
         private String saleImg;
         private Integer amount;
         private Long categoryIdx;
@@ -48,6 +50,7 @@ public class ResSaleDetailDTO {
                     .title(saleEntity.getTitle())
                     .introduction(saleEntity.getIntroduction())
                     .price(saleEntity.getPrice())
+                    .priceStr(new DecimalFormat("###,###").format(saleEntity.getPrice()))
                     .saleImg(saleEntity.getSaleImg())
                     .amount(saleEntity.getAmount())
                     .categoryIdx(saleEntity.getCategoryEntity().getIdx())
