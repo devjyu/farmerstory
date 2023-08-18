@@ -98,7 +98,17 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="saleDetailBtn">
+                <div class="saleDetailBtn" th:if="${session.dto != null}">
+                    <div class="button-container" th:if="${session.dto.user.idx == saleDetail.userIdx}">
+                        <button>수정하기</button>
+                        <button>삭제하기</button>
+                    </div>
+                    <div class="button-container" th:if="${session.dto.user.idx != saleDetail.userIdx}">
+                        <button>구매하기</button>
+                        <button>담기</button>
+                    </div>
+                </div>
+                <div class="saleDetailBtn" th:if="${session.dto == null}">
                     <div class="button-container">
                         <button>구매하기</button>
                         <button>담기</button>
