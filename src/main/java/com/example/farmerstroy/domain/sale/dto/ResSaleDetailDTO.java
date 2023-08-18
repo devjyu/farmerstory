@@ -1,7 +1,6 @@
 package com.example.farmerstroy.domain.sale.dto;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 import com.example.farmerstroy.model.sale.entity.SaleEntity;
 
@@ -19,13 +18,8 @@ import lombok.ToString;
 // 판매 상세페이지 DTO
 public class ResSaleDetailDTO {
 
-    private List<Sale> saleDetailList;
+    private Sale sale;
 
-    public static ResSaleDetailDTO of(List<SaleEntity> saleEntityList) {
-        return ResSaleDetailDTO.builder()
-                .saleDetailList(Sale.fromEntityList(saleEntityList))
-                .build();
-    }
 
     @NoArgsConstructor
     @AllArgsConstructor
@@ -56,13 +50,6 @@ public class ResSaleDetailDTO {
                     .categoryIdx(saleEntity.getCategoryEntity().getIdx())
                     .userIdx(saleEntity.getUserEntity().getIdx())
                     .build();
-        }
-
-        public static List<Sale> fromEntityList(List<SaleEntity> saleEntityList) {
-            return saleEntityList
-                    .stream()
-                    .map((saleEntity) -> Sale.fromEntity(saleEntity))
-                    .toList();
         }
     }    
 }

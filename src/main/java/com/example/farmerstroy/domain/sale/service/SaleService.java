@@ -1,10 +1,12 @@
 package com.example.farmerstroy.domain.sale.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.farmerstroy.common.exception.BadRequestException;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDTO;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDetailDTO;
 import com.example.farmerstroy.model.category.entity.CategoryEntity;
@@ -32,8 +34,13 @@ public class SaleService {
 
     // 판매 상세페이지 전체 리스트
     public ResSaleDetailDTO getSaleDetailData(Long saleIdx) {
-        List<SaleEntity> saleDetailList = saleRepository.findByIdx(saleIdx);
-        ResSaleDetailDTO dto = ResSaleDetailDTO.of(saleDetailList);
+        Optional<SaleEntity> saleEntityOptional = saleRepository.findByIdx(saleIdx);
+        if (saleEntityOptional.isEmpty()) {
+            throw new BadRequestException("해당 페이지가 없습니다.");
+        }
+        ResSaleDetailDTO dto = ResSaleDetailDTO.builder()
+        .sale(ResSaleDetailDTO.Sale.fromEntity(saleEntityOptional.get()))
+        .build();
         return dto;
     }
 } 

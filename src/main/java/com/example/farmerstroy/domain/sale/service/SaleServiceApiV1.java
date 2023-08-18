@@ -14,6 +14,7 @@ import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.common.dto.ResponseDTO;
 import com.example.farmerstroy.common.exception.BadRequestException;
 import com.example.farmerstroy.domain.sale.dto.ReqSaleInsertDTO;
+import com.example.farmerstroy.domain.sale.dto.ReqSaleUpdateDTO;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDTO;
 import com.example.farmerstroy.model.category.entity.CategoryEntity;
 import com.example.farmerstroy.model.category.repository.CategoryRepository;
@@ -107,5 +108,10 @@ public class SaleServiceApiV1 {
                 .build()
             ,HttpStatus.OK
         );
+    }
+
+    @Transactional
+    public ResponseEntity<?> updateSaleUpdate(ReqSaleUpdateDTO dto) {
+        List<SaleEntity> findByIdx = saleRepository.findByIdx(dto.getSale().getIdx());
     }
 }
