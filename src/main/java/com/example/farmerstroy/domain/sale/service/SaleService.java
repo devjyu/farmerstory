@@ -30,6 +30,7 @@ public class SaleService {
         return dto ;
     }
 
+    // 판매 상세페이지 전체 리스트
     public ResSaleDetailDTO getSaleDetailData(Long saleIdx) {
         List<SaleEntity> saleDetailList = saleRepository.findByIdx(saleIdx);
         ResSaleDetailDTO dto = ResSaleDetailDTO.of(saleDetailList);
