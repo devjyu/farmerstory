@@ -47,4 +47,11 @@ public class SaleController {
         return "saleinsert";
     }
 
+    // 상품 수정하기
+    @GetMapping("/saleupdate")
+    public String saleUpdate() {
+        return "saleupdate";
+    }
+
+
 }
