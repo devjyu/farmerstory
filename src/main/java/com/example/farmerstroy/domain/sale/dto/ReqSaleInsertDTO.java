@@ -2,7 +2,6 @@ package com.example.farmerstroy.domain.sale.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ch.qos.logback.core.net.LoginAuthenticator;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
