@@ -37,6 +37,7 @@ public class SaleController {
         return "saledetail";
     }
 
+    // 상품 등록하기
     @GetMapping("/saleinsert")
     public String saleInsert(HttpSession session) {
         LoginUserDTO loginUser = (LoginUserDTO)session.getAttribute("dto");
