@@ -122,9 +122,9 @@
         </div>
         <div class="uploadContainer">
             <div class="uploadImg">
-                <label for="saleUploadImg">이미지 등록</label>
+                <label for="file">이미지 등록</label>
                 <div>
-                    <div><input type="file" id="saleUploadImg"></div>
+                    <div><input type="file" id="file"></div>
                 </div>
                 <div class="fileInputImg">
                     <img id="preview" src="" alt="" width="100%">
@@ -134,13 +134,22 @@
                 <h1>상품 등록하기</h1>
                 <div>
                     <label for="saleUploadName">상품 이름</label>
-                    <input type="text" placeholder="상품 이름을 적어주세요">
+                    <input type="text" id="saleUploadName" placeholder="상품 이름을 적어주세요">
                 </div>
                 <div>
                     <label for="saleUploadCategory">카테고리</label>
                     <select id="saleUploadCategory">
                         <option value='1'>곡류</option>
                         <option value='2'>콩류</option>
+                        <option value='3'>서류</option>
+                        <option value='4'>채소</option>
+                        <option value='5'>과실류</option>
+                        <option value='6'>종실류</option>
+                        <option value='7'>특용작물</option>
+                        <option value='8'>약용작물</option>
+                        <option value='9'>전매작물</option>
+                        <option value='10'>화훼작물</option>
+                        <option value='11'>버섯류</option>
                     </select>
                 </div>
                 <div>
@@ -149,7 +158,7 @@
                 </div>
                 <div>
                     <label for="saleUploadIntroduction">상세 설명</label>
-                    <input type="text" id="saleDetailTableIntroduce" placeholder="상세 설명을 적어주세요">
+                    <input type="text" id="saleUploadIntroduction" placeholder="상세 설명을 적어주세요">
                 </div>
                 <div>
                     <label for="saleUploadAmount">수량</label>
@@ -160,7 +169,7 @@
                     <input type="text" id="saleUploadPrice" placeholder="가격을 입력해주세요">
                 </div>
                 <div class="saleDetailBtn">
-                    <button>등록하기</button>
+                    <button type="button" onclick="requestSale()">등록하기</button>
                 </div>
             </div>
         </div>
@@ -209,7 +218,7 @@
         };
 
         // 파일 업로드
-        const fileInput = document.getElementById('saleUploadImg');
+        const fileInput = document.getElementById('file');
             const preview = document.getElementById('preview');
 
             fileInput.addEventListener('change', function () {
@@ -226,5 +235,98 @@
                     preview.src = '';
                 }
         });
+
+        // 상품등록
+        const requestSale = () => {
+            alert("안녕");
+            // 입력값 검증
+            if (!validateFields()) {
+                return;
+                
+            }
+
+            const nameTag = document.querySelector("#saleUploadName");
+            const categoryTag = document.querySelector("#saleUploadCategory");
+            const titleTag = document.querySelector("#saleUploadTitle");
+            const introductionTag = document.querySelector("#saleUploadIntroduction");
+            const amountTag = document.querySelector("#saleUploadAmount");
+            const priceTag = document.querySelector("#saleUploadPrice");
+            const saleImg = document.querySelector("#file");
+
+            const formData = new FormData();
+
+            formData.append("name", nameTag.value);
+            formData.append("title", titleTag.value);
+            formData.append("introduction", introductionTag.value);
+            formData.append("amount", amountTag.value);
+            formData.append("price", priceTag.value);
+            formData.append("categoryIdx", categoryTag.value);
+
+            if (saleImg.files.length > 0) {
+                formData.append("saleImg", saleImg.files[0]);
+            }
+
+            fetch("/api/v1/sale", {
+                method : "post",
+                body : formData
+            })
+            .then((res) => res.json())
+            .then((result) => {
+                alert(result.message);
+                if (result.code === 0) {
+                    location.replace("/sale");
+                }
+            }).catch((error) => {
+                console.error("Fetch error:", error);
+            })
+        };
+
+        // 유효성 검사
+        const validateFields = () => {
+            const saleUploadNameElement = document.querySelector("#saleUploadName");
+            const saleUploadCategoryElement = document.querySelector("#saleUploadCategory");
+            const saleUploadTitleElement = document.querySelector("#saleUploadTitle");
+            const saleUploadIntroductionElement = document.querySelector("#saleUploadIntroduction");
+            const saleUploadAmountElement = document.querySelector("#saleUploadAmount");
+            const saleUploadPriceElement = document.querySelector("#saleUploadPrice");
+
+            if (saleUploadNameElement.value === "") {
+                alert("상품 이름을 확인해주세요");
+                saleUploadNameElement.focus();
+                return false;
+            }
+
+            if (saleUploadCategoryElement.value == null) {
+                alert("카테고리를 선택해주세요");
+                saleUploadCategoryElement.focus();
+                return false;
+            }
+
+            if (saleUploadTitleElement.value === "") {
+                alert("제목을 입력해주세요");
+                saleUploadTitleElement.focus();
+                return false;
+            }
+
+            if (saleUploadIntroductionElement.value === "") {
+                alert("상세 설명을 적어주세요");
+                saleUploadIntroductionElement.focus();
+                return false;
+            }
+
+            if (saleUploadAmountElement.value < 0) {
+                alert("수량을 확인해주세요");
+                saleUploadAmountElement.focus();
+                return false;
+            }
+
+            if (saleUploadPriceElement.value === "") {
+                alert("금액을 입력해주세요");
+                saleUploadPriceElement.focus();
+                return false;
+            }
+
+            return true;
+        }
     </script>
 </html>
