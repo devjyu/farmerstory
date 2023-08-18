@@ -39,6 +39,7 @@ public class ResSaleDetailDTO {
         private String saleImg;
         private Integer amount;
         private Long categoryIdx;
+        private Long userIdx;
 
         public static Sale fromEntity(SaleEntity saleEntity) {
             return Sale.builder()
@@ -50,6 +51,7 @@ public class ResSaleDetailDTO {
                     .saleImg(saleEntity.getSaleImg())
                     .amount(saleEntity.getAmount())
                     .categoryIdx(saleEntity.getCategoryEntity().getIdx())
+                    .userIdx(saleEntity.getUserEntity().getIdx())
                     .build();
         }
 
