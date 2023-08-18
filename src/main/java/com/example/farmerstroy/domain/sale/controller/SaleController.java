@@ -5,10 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDTO;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDetailDTO;
 import com.example.farmerstroy.domain.sale.service.SaleService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -36,7 +38,11 @@ public class SaleController {
     }
 
     @GetMapping("/saleinsert")
-    public String saleInsert() {
+    public String saleInsert(HttpSession session) {
+        LoginUserDTO loginUser = (LoginUserDTO)session.getAttribute("dto");
+        if (loginUser == null || loginUser.getUser().getAuthority() != 1) {
+            return "redirect:/sale";
+        }
         return "saleinsert";
     }
 
