@@ -31,6 +31,8 @@ public class SaleControllerApiV1 {
 
     @PostMapping
     public ResponseEntity<?> insertSaleTable(ReqSaleInsertDTO dto, HttpSession session) throws IOException{
+        // System.out.println(name);
+        System.out.println(dto);
         LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
         return saleServiceApiV1.insertSaleTable(dto, userDTO);
     }
