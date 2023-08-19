@@ -111,7 +111,76 @@ public class SaleServiceApiV1 {
     }
 
     @Transactional
-    public ResponseEntity<?> updateSaleUpdate(ReqSaleUpdateDTO dto) {
-        List<SaleEntity> findByIdx = saleRepository.findByIdx(dto.getSale().getIdx());
+    public ResponseEntity<?> updateSaleTable(Long idx, ReqSaleUpdateDTO dto, LoginUserDTO loginUserDTO) throws IOException{
+
+          System.out.println("=================구분선=============");
+
+        Optional<SaleEntity> saleEntityOptional = saleRepository.findByIdx(idx);
+
+        if (saleEntityOptional.isEmpty()) {
+            throw new BadRequestException("해당 하는 판매 게시글이 없습니다.");
+        }
+
+        SaleEntity saleEntity = saleEntityOptional.get();
+
+        if (!saleEntity.getUserEntity().getIdx().equals(loginUserDTO.getUser().getIdx())) {
+            throw new BadRequestException("권한이 없습니다.");
+        }
+
+        Optional<CategoryEntity> categoryEntityOptional = categoryRepository.findByIdx(dto.getCategoryIdx());
+
+        if (categoryEntityOptional.isEmpty()) {
+            throw new BadRequestException("카테고리 번호를 잘못 입력하셨습니다.");
+        }
+
+        String saleImg = null;
+
+        if (dto.getSaleImg() != null) {
+            String imgBase64 = Base64.getEncoder().encodeToString(dto.getSaleImg().getBytes());
+            saleImg = "data:" + dto.getSaleImg().getContentType() + ";base64," + imgBase64;
+            System.out.println("사진" + saleImg);
+        } else {
+            saleImg = "http://via.placeholder.com/320x240";
+        }
+
+        // CategoryEntity categoryEntity = ;
+        System.out.println(dto.getSaleImg());
+        System.out.println("위에꺼");
+        SaleEntity updateSaleEntity = SaleEntity
+        .builder()
+        .idx(idx)
+        .name(dto.getName())
+        .title(dto.getTitle())
+        .introduction(dto.getIntroduction())
+        .price(dto.getPrice())
+        .amount(dto.getAmount())
+        .saleImg(saleImg)
+        .categoryEntity(categoryEntityOptional.get())
+        .build();
+
+        saleRepository.save(updateSaleEntity);
+
+        // saleEntity.setIdx(dto.getSale().getIdx());
+        // saleEntity.setName(dto.getSale().getName());
+        // saleEntity.setTitle(dto.getSale().getTitle());
+        // saleEntity.setIntroduction(dto.getSale().getIntroduction());
+        // saleEntity.setPrice(dto.getSale().getPrice());
+        // saleEntity.setAmount(dto.getSale().getAmount());
+        // // saleEntity.setSaleImg(dto.getSale().getSaleImg().toString());
+        // saleEntity.setCategoryEntity(categoryEntityOptional.get());
+        System.out.println("=================구분선=============");
+        
+        System.out.println(updateSaleEntity);
+
+        System.out.println("구분선.------------------------------");
+
+        return new ResponseEntity<>(
+            ResponseDTO.builder()
+                .code(0)
+                .message("상품 수정에 성공했습니다.")
+                .build()
+            ,HttpStatus.OK
+        );
+
     }
 }

@@ -48,10 +48,10 @@ public class SaleController {
     }
 
     // 상품 수정하기
-    @GetMapping("/saleupdate")
-    public String saleUpdate() {
+    @GetMapping("/sale/saledetail/{saleIdx}")
+    public String saleUpdate(@PathVariable Long saleIdx, Model model) {
+        ResSaleDetailDTO resSaleDetailList = saleService.getSaleDetailData(saleIdx);
+        model.addAttribute("resSaleDetailList", resSaleDetailList);
         return "saleupdate";
     }
-
-
 }

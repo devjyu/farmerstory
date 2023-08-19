@@ -97,7 +97,7 @@ public class AuthServiceApiV1 {
                         throw new BadRequestException("이미 존재합니다.");
                 }
 
-                // String profileImg = "default_profile.png";
+                // 사진 저장
                 String profileImg = null;
 
                 if (dto.getProfileImg() != null) {

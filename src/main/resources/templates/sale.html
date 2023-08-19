@@ -55,7 +55,6 @@
       <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
       <ul class="side-menu-links">
         <li><a href="/saleinsert" th:if="${session.dto.user.authority == 1}">상품등록하기</a></li>
-        <li><a href="/saleupdate" th:if="${session.dto.user.authority == 1}">상품수정하기</a></li>
         <li><a href="#">개인정보수정</a></li>
         <li><a href="#">장바구니</a></li>
         <li><a href="javascript:logout();">로그아웃</a></li>

@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "sale")
@@ -27,6 +28,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 public class SaleEntity {
     
     @Id
@@ -46,7 +48,7 @@ public class SaleEntity {
     @Column(name = "price", nullable = false)
     private Integer price;
 
-    @Column(name = "sale_img", nullable = false)
+    @Column(name = "sale_img", length = 10000000)
     private String saleImg;
 
     @Column(name = "amount")

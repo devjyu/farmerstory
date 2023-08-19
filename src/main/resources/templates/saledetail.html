@@ -56,7 +56,6 @@
             <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
             <ul class="side-menu-links">
                 <li><a href="/saleinsert" th:if="${session.dto.user.authority == 1}">상품등록하기</a></li>
-                <li><a href="/saleupdate" th:if="${session.dto.user.authority == 1}">상품수정하기</a></li>
                 <li><a href="#">개인정보수정</a></li>
                 <li><a href="#">장바구니</a></li>
                 <li><a href="javascript:logout();">로그아웃</a></li>
@@ -66,7 +65,7 @@
             <div class="saleDetailImg">
                 <img src="http://via.placeholder.com/400x450" alt="">
             </div>
-            <div class="saleDetailTableIntroduce" th:each="saleDetail : ${resSaleDetailList.saleDetailList}">
+            <div class="saleDetailTableIntroduce" th:each="saleDetail : ${resSaleDetailList.sale}">
                 <h1 th:text="${saleDetail.title}"></h1>
                 <table>
                     <caption>
@@ -102,7 +101,7 @@
                 </table>
                 <div class="saleDetailBtn" th:if="${session.dto != null}">
                     <div class="button-container" th:if="${session.dto.user.idx == saleDetail.userIdx}">
-                        <button>수정하기</button>
+                        <button th:onclick="goSaleUpdate([[${saleDetail.idx}]])">수정하기</button>
                         <button>삭제하기</button>
                     </div>
                 </div>
@@ -170,6 +169,11 @@
             const tempAmount = document.querySelector("#amount");
             const price = document.querySelector("#price");
             document.querySelector("#allPrice").innerHTML = (Number(tempAmount.value) * Number(price.value)).toLocaleString() + "원";
+        }
+
+        // saleIdX에 따른 상세페이지 이동 함수
+        const goSaleUpdate = (saleIdx) => {
+            location.href = "/sale/saledetail/" + saleIdx;
         }
 
     </script>

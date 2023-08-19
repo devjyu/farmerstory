@@ -54,31 +54,32 @@
             <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
             <ul class="side-menu-links">
                 <li><a href="/saleinsert" th:if="${session.dto.user.authority == 1}">상품등록하기</a></li>
-                <li><a href="/saleinsert" th:if="${session.dto.user.authority == 1}">상품수정하기</a></li>
                 <li><a href="#">개인정보수정</a></li>
                 <li><a href="#">장바구니</a></li>
                 <li><a href="javascript:logout();">로그아웃</a></li>
             </ul>
         </div>
-        <div class="uploadContainer">
+        <div class="uploadContainer" th:each="saleDetail : ${resSaleDetailList.sale}">
             <div class="uploadImg">
                 <label for="file">이미지 수정</label>
                 <div>
                     <div><input type="file" id="file"></div>
                 </div>
                 <div class="fileInputImg">
-                    <img id="preview" src="" alt="" width="100%">
+                    <img id="preview" th:src="${saleDetail.saleImg}" alt="" width="100%">
                 </div>
             </div>
             <div class="uploadText">
                 <h1>상품 수정하기</h1>
                 <div>
+                    <input type="hidden" th:value="${saleDetail.idx}" id="saleUploadIdx">
                     <label for="saleUploadName">상품 이름</label>
-                    <input type="text" id="saleUploadName" placeholder="상품 이름을 적어주세요">
+                    <input type="text" id="saleUploadName" placeholder="상품 이름을 적어주세요" th:value="${saleDetail.name}">
                 </div>
                 <div>
                     <label for="saleUploadCategory">카테고리</label>
                     <select id="saleUploadCategory">
+                        <option value="0">--선택--</option>
                         <option value='1'>곡류</option>
                         <option value='2'>콩류</option>
                         <option value='3'>서류</option>
@@ -94,22 +95,23 @@
                 </div>
                 <div>
                     <label for="saleUploadTitle">제목</label>
-                    <input type="text" id="saleUploadTitle" placeholder="제목을 적어주세요">
+                    <input type="text" id="saleUploadTitle" placeholder="제목을 적어주세요" th:value="${saleDetail.title}">
                 </div>
                 <div>
                     <label for="saleUploadIntroduction">상세 설명</label>
-                    <input type="text" id="saleUploadIntroduction" placeholder="상세 설명을 적어주세요">
+                    <input type="text" id="saleUploadIntroduction" placeholder="상세 설명을 적어주세요" th:value="${saleDetail.introduction}">
                 </div>
                 <div>
                     <label for="saleUploadAmount">수량</label>
-                    <input type="number" name="amount" id="saleUploadAmount" min="1" max="100" placeholder="수량을 입력해주세요">
+                    <input type="number" name="amount" id="saleUploadAmount" min="1" max="100" placeholder="수량을 입력해주세요" th:value="${saleDetail.amount}">
                 </div>
                 <div>
                     <label for="saleUploadPrice">가격</label>
-                    <input type="text" id="saleUploadPrice" placeholder="가격을 입력해주세요">
+                    <input type="text" id="saleUploadPrice" placeholder="가격을 입력해주세요" th:value="${saleDetail.price}">
                 </div>
                 <div class="saleDetailBtn">
-                    <button type="button" onclick="requestSale()">등록하기</button>
+                    <button type="button" onclick="requestSaleUpadet()">수정하기</button>
+                    <button type="button">취소하기</button>
                 </div>
             </div>
         </div>
@@ -176,15 +178,14 @@
                 }
         });
 
-        // 상품등록
-        const requestSale = () => {
-            alert("안녕");
+        // 상품수정
+        const requestSaleUpadet = (saleIdx) => {
             // 입력값 검증
             if (!validateFields()) {
-                return;
-                
+                return; 
             }
 
+            const idxTag = document.querySelector("#saleUploadIdx");
             const nameTag = document.querySelector("#saleUploadName");
             const categoryTag = document.querySelector("#saleUploadCategory");
             const titleTag = document.querySelector("#saleUploadTitle");
@@ -195,6 +196,7 @@
 
             const formData = new FormData();
 
+            formData.append("idx", idxTag.value);
             formData.append("name", nameTag.value);
             formData.append("title", titleTag.value);
             formData.append("introduction", introductionTag.value);
@@ -207,7 +209,7 @@
             }
 
             fetch("/api/v1/sale", {
-                method : "post",
+                method : "PUT",
                 body : formData
             })
             .then((res) => res.json())
@@ -219,6 +221,7 @@
             }).catch((error) => {
                 console.error("Fetch error:", error);
             })
+
         };
 
         // 유효성 검사
