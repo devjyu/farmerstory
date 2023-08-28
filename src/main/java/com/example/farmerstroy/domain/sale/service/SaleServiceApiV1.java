@@ -143,36 +143,30 @@ public class SaleServiceApiV1 {
             saleImg = "http://via.placeholder.com/320x240";
         }
 
-        // CategoryEntity categoryEntity = ;
-        System.out.println(dto.getSaleImg());
-        System.out.println("위에꺼");
-        SaleEntity updateSaleEntity = SaleEntity
-        .builder()
-        .idx(idx)
-        .name(dto.getName())
-        .title(dto.getTitle())
-        .introduction(dto.getIntroduction())
-        .price(dto.getPrice())
-        .amount(dto.getAmount())
-        .saleImg(saleImg)
-        .categoryEntity(categoryEntityOptional.get())
-        .build();
+        // System.out.println(dto.getSaleImg());
+        // System.out.println("위에꺼");
+        // SaleEntity updateSaleEntity = SaleEntity
+        // .builder()
+        // .idx(idx)
+        // .name(dto.getName())
+        // .title(dto.getTitle())
+        // .introduction(dto.getIntroduction())
+        // .price(dto.getPrice())
+        // .amount(dto.getAmount())
+        // .saleImg(saleImg)
+        // .categoryEntity(categoryEntityOptional.get())
+        // .build();
 
-        saleRepository.save(updateSaleEntity);
+        // saleRepository.save(updateSaleEntity);
 
-        // saleEntity.setIdx(dto.getSale().getIdx());
-        // saleEntity.setName(dto.getSale().getName());
-        // saleEntity.setTitle(dto.getSale().getTitle());
-        // saleEntity.setIntroduction(dto.getSale().getIntroduction());
-        // saleEntity.setPrice(dto.getSale().getPrice());
-        // saleEntity.setAmount(dto.getSale().getAmount());
-        // // saleEntity.setSaleImg(dto.getSale().getSaleImg().toString());
-        // saleEntity.setCategoryEntity(categoryEntityOptional.get());
-        System.out.println("=================구분선=============");
-        
-        System.out.println(updateSaleEntity);
-
-        System.out.println("구분선.------------------------------");
+        saleEntity.setIdx(dto.getIdx());
+        saleEntity.setName(dto.getName());
+        saleEntity.setTitle(dto.getTitle());
+        saleEntity.setIntroduction(dto.getIntroduction());
+        saleEntity.setPrice(dto.getPrice());
+        saleEntity.setAmount(dto.getAmount());
+        saleEntity.setSaleImg(saleImg);
+        saleEntity.setCategoryEntity(categoryEntityOptional.get());
 
         return new ResponseEntity<>(
             ResponseDTO.builder()
