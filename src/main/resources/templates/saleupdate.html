@@ -112,7 +112,7 @@
                 <div class="saleUpdateBtn">
                     <div class="saleUpdateBtn-Container">
                         <button type="button" onclick="requestSaleUpadet()">수정하기</button>
-                        <button type="button">취소하기</button>
+                        <button type="button" onclick="goSale()">취소하기</button>
                     </div>
                 </div>
             </div>
@@ -273,5 +273,11 @@
 
             return true;
         }
+
+        // 취소하기
+        const goSale = () => {
+            alert("수정을 취소하시겠습니까?");
+            location.replace("/sale");
+        };
     </script>
 </html>
