@@ -27,6 +27,6 @@ public class AuthController {
         //session.invalidate();
 		session.invalidate();   
 
-        return "redirect:/login";
+        return "redirect:/main";
     }
 }
