@@ -2,8 +2,6 @@ package com.example.farmerstroy.domain.sale.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.farmerstroy.model.sale.entity.SaleEntity;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
