@@ -61,12 +61,12 @@
         </div>
         <div class="uploadContainer">
             <div class="uploadImg">
-                <label for="file">이미지 등록</label>
+                <label>이미지 등록하기</label>
                 <div>
                     <div><input type="file" id="file"></div>
                 </div>
                 <div class="fileInputImg">
-                    <img id="preview" src="" alt="" width="100%">
+                    <img id="preview" src="" alt="사진을 선택해주세요(없을 시 기본이미지로 저장됩니다.)" >
                 </div>
             </div>
             <div class="uploadText">
@@ -107,8 +107,10 @@
                     <label for="saleUploadPrice">가격</label>
                     <input type="text" id="saleUploadPrice" placeholder="가격을 입력해주세요">
                 </div>
-                <div class="saleDetailBtn">
-                    <button type="button" onclick="requestSale()">등록하기</button>
+                <div class="saleInsertBtn">
+                    <div class="saleInsertBtn-Container">
+                        <button type="button" onclick="requestSale()">등록하기</button>
+                    </div>
                 </div>
             </div>
         </div>

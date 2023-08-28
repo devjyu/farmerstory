@@ -109,9 +109,11 @@
                     <label for="saleUploadPrice">가격</label>
                     <input type="text" id="saleUploadPrice" placeholder="가격을 입력해주세요" th:value="${saleDetail.price}">
                 </div>
-                <div class="saleDetailBtn">
-                    <button type="button" onclick="requestSaleUpadet()">수정하기</button>
-                    <button type="button">취소하기</button>
+                <div class="saleUpdateBtn">
+                    <div class="saleUpdateBtn-Container">
+                        <button type="button" onclick="requestSaleUpadet()">수정하기</button>
+                        <button type="button">취소하기</button>
+                    </div>
                 </div>
             </div>
         </div>
