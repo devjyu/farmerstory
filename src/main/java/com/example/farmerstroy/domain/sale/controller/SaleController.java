@@ -49,9 +49,13 @@ public class SaleController {
 
     // 상품 수정하기
     @GetMapping("/sale/saledetail/{saleIdx}")
-    public String saleUpdate(@PathVariable Long saleIdx, Model model) {
+    public String saleUpdate(@PathVariable Long saleIdx, Model model, HttpSession session) {
         ResSaleDetailDTO resSaleDetailList = saleService.getSaleDetailData(saleIdx);
         model.addAttribute("resSaleDetailList", resSaleDetailList);
+        LoginUserDTO loginUser = (LoginUserDTO)session.getAttribute("dto");
+        if (loginUser == null || loginUser.getUser().getAuthority() != 1) {
+            return "redirect:/sale";
+        }
         return "saleupdate";
     }
 }
