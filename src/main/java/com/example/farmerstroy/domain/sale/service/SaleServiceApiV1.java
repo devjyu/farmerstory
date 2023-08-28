@@ -183,4 +183,33 @@ public class SaleServiceApiV1 {
         );
 
     }
+
+    @Transactional
+    public ResponseEntity<?> deleteSaleTable(Long idx, LoginUserDTO loginUserDTO){
+        System.out.println("idx :" + idx);
+        Optional<SaleEntity> saleEntityOptional = saleRepository.findByIdx(idx);
+
+        if (saleEntityOptional.isEmpty()) {
+            throw new BadRequestException("해당 판매 게시글이 없습니다.");
+        }
+
+        SaleEntity saleEntity = saleEntityOptional.get();
+
+        System.out.println("구분선");
+        
+        if (!saleEntity.getUserEntity().getIdx().equals(loginUserDTO.getUser().getIdx())) {
+            throw new BadRequestException("해당 권한이 없습니다.");
+        }
+
+        saleRepository.delete(saleEntity);
+
+        return new ResponseEntity<>(
+            ResponseDTO.builder()
+            .code(0)
+            .message("상품 게시글 삭제에 성공했습니다.")
+            .build(),
+            HttpStatus.OK
+        );
+
+    }
 }

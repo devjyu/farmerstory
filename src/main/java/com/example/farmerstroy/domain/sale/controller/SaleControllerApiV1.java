@@ -3,6 +3,7 @@ package com.example.farmerstroy.domain.sale.controller;
 import java.io.IOException;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.domain.sale.dto.ReqSaleInsertDTO;
 import com.example.farmerstroy.domain.sale.dto.ReqSaleUpdateDTO;
+import com.example.farmerstroy.domain.sale.dto.ResSaleDetailDTO;
 import com.example.farmerstroy.domain.sale.service.SaleServiceApiV1;
 
 import jakarta.servlet.http.HttpSession;
@@ -41,12 +43,21 @@ public class SaleControllerApiV1 {
 
     @PutMapping
     public ResponseEntity<?> updateSaleTable(Long idx, ReqSaleUpdateDTO dto, HttpSession session) throws IOException {
-        System.out.println("에ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ" + dto);
+        // System.out.println("에ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ" + dto);
         // System.out.println(saleIdx);
     
         LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
 
 
         return saleServiceApiV1.updateSaleTable(idx, dto, userDTO);
+    }
+
+    @DeleteMapping("/{idx}")
+    public ResponseEntity<?> deleteSaleTable(@PathVariable Long idx, ResSaleDetailDTO dto, HttpSession session) {
+        LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
+        // System.out.println("뭐가문제니");
+        // System.out.println(idx);
+        // System.out.println(userDTO);
+        return saleServiceApiV1.deleteSaleTable(idx, userDTO);
     }
 }
