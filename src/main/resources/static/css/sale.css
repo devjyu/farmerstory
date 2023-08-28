@@ -201,13 +201,11 @@ header {
 
   .saleDetail .button-container {
     display: flex;
-    justify-content: space-around;
-    align-items: center; /* Optional: Align buttons vertically */
     margin-top: 20px; /* Add some spacing between the buttons and the table */
   }
 
   .saleDetail .button-container button {
-    width: 30%;
+    width: 100%;
     background-color: #90FC2B;
     color: #333;
     border: none;
