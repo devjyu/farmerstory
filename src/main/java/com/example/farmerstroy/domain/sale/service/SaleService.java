@@ -32,7 +32,7 @@ public class SaleService {
         return dto ;
     }
 
-    // 판매 상세페이지 전체 리스트
+    // 판매 상세페이지 게시글 가져오기
     public ResSaleDetailDTO getSaleDetailData(Long saleIdx) {
         Optional<SaleEntity> saleEntityOptional = saleRepository.findByIdx(saleIdx);
         if (saleEntityOptional.isEmpty()) {
