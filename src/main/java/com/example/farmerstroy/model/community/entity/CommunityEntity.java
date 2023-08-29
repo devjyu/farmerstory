@@ -40,6 +40,9 @@ public class CommunityEntity {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Column(name = "community_img")
+    private String communityImg;
+
     @Column(name = "create_date", nullable = false)
     private LocalDate createDate;
 

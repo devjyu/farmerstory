@@ -50,6 +50,7 @@ CREATE TABLE `community` (
   `idx` int NOT NULL AUTO_INCREMENT COMMENT 'Community Post Number',
   `title` varchar(100) NOT NULL COMMENT 'Community Post Title',
   `content` varchar(1000) NOT NULL COMMENT 'Community Post Content',
+  `community_img` longtext DEFAULT NULL COMMENT 'Community Post Image',
   `create_date` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Community Post Creation Date',
   `user_idx` int NOT NULL COMMENT 'User Number who wrote the Community Post',
   PRIMARY KEY (`idx`),
