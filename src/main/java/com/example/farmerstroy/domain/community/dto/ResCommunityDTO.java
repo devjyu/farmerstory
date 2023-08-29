@@ -27,7 +27,7 @@ public class ResCommunityDTO {
         private String title;
         private String content;
         private LocalDate createDate;
-        private Long userIdx;
+        private String userId;
 
         public static Community fromEntity(CommunityEntity communityEntity) {
             return Community.builder()
@@ -35,7 +35,7 @@ public class ResCommunityDTO {
                 .title(communityEntity.getTitle())
                 .content(communityEntity.getContent())
                 .createDate(communityEntity.getCreateDate())
-                .userIdx(communityEntity.getUserEntity().getIdx())
+                .userId(communityEntity.getUserEntity().getId())
             .build();
         }
 
