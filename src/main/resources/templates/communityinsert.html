@@ -5,55 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/sale.css">
-    <style>
-        .wirteContainer {
-            padding: 50px 0;
-        }
-
-        .writeText {
-            width: 80%;
-            margin: 20px auto 40px auto;
-            display: flex;
-            justify-content: center;
-        }
-
-        .writeTextContainer {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-        }
-
-        .writeTextContainer label {
-            font-size: 1.2em;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .writeTextContainer input[type="text"],
-        .writeTextContainer textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .writeTextContainer button {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .writeTextContainer button:hover {
-            background-color: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/community.css">
     <title>Farmer's Story 커뮤니티 작성하기</title>
 </head>
 <body>
@@ -122,10 +74,12 @@
             <label>이미지 등록하기</label>
             <input type="file" id="file">
             <div class="fileInputImg">
-                <img id="preview" src="" alt="" >
+                <img id="preview" src="" alt="" width="100%">
             </div>
-            <button type="button" onclick="requestCommunity()">등록하기</button>
-            <button type="button" onclick="goCommunity()">취소하기</button>
+            <div class="buttonContainer">
+                <button type="button" onclick="requestCommunity()">등록하기</button>
+                <button type="button" onclick="goCommunity()">취소하기</button>
+            </div>
         </div>
       </div>
       <footer>

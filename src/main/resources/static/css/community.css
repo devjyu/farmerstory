@@ -57,3 +57,106 @@
   tr:hover {
     background-color: #ddd;
   }
+
+  /* comunityinsert.html */
+  .wirteContainer {
+    padding: 50px 0;
+    margin-bottom: 100px;
+  }
+
+  .writeText {
+      width: 80%;
+      margin: 20px auto 40px auto;
+      display: flex;
+      justify-content: center;
+  }
+
+  .writeTextContainer {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+  }
+
+  .writeTextContainer label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+  }
+
+  .writeTextContainer input[type="text"],
+  .writeTextContainer textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+
+  input[type="text"]::placeholder,
+  textarea::placeholder {
+      color: #999;
+  }
+
+  .writeTextContainer input[type="file"] {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      padding: 0;
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .writeTextContainer input[type="file"]::-webkit-file-upload-button {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .writeTextContainer input[type="file"]::-webkit-file-upload-button:hover {
+      background-color: #45a049;
+  }
+
+  .writeTextContainer input[type="file"]::-webkit-file-upload-button:active {
+      background-color: #3e9142;
+  }
+
+  input[type="text"]:focus,
+  textarea:focus,
+  .writeTextContainer input[type="file"]:focus {
+      outline: 1px solid #A6E61C;
+  }
+
+  .writeTextContainer .buttonContainer{
+      display: flex;
+      justify-content: end;
+  }
+  .writeTextContainer .buttonContainer button {
+      padding: 8px 40px;
+      background-color: #90FC2B;
+      border: none;
+      border-radius: 20px;
+      color: #333;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      margin-top: 10px;
+  }
+
+  .writeTextContainer button:hover {
+      background-color: #55E61C;
+      color: #fff;
+  }
+
+  .writeBtn button:focus {
+      outline: 1px solid #A6E61C;
+  }
+
+  .writeBtn button:active{
+      background-color: #55E61C;
+  }
