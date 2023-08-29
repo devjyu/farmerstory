@@ -15,10 +15,17 @@ public class CommunityController {
 
     private final CommunityService communityService;
     
+    // 커뮤니티 페이지
     @GetMapping("/community")
     public String communityPage(Model model){
         ResCommunityDTO resCommunityDTOList = communityService.getCommunityData();
         model.addAttribute("resCommunityDTOList", resCommunityDTOList);
         return "community";
+    }
+
+    // 커뮤니티 작성하기 페이지
+    @GetMapping("/communityinsert")
+    public String communityInsertPage(){
+        return "communityinsert";
     }
 }
