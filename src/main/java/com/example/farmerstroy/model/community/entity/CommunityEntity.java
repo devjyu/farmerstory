@@ -1,6 +1,6 @@
 package com.example.farmerstroy.model.community.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.example.farmerstroy.model.comment.entity.CommentEntity;
@@ -41,7 +41,7 @@ public class CommunityEntity {
     private String content;
 
     @Column(name = "create_date", nullable = false)
-    private LocalDateTime createDate;
+    private LocalDate createDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx", referencedColumnName = "idx", updatable = false, nullable = false)
