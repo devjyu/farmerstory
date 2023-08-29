@@ -266,7 +266,6 @@ header {
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 30%;
   }
 
@@ -277,11 +276,16 @@ header {
 
   .uploadText{
     margin-left: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .uploadImg label {
     display: block;
     margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .uploadText label{
     font-weight: bold;
   }
 
@@ -310,7 +314,11 @@ header {
     background-color: #3e9142;
   }
 
-  .uploadImg input[type="file"]:focus {
+  .uploadImg input[type="file"]:focus,
+  .uploadText input[type="text"]:focus,
+  .uploadText input[type="number"]:focus,
+  .uploadText select:focus, 
+  .uploadText textarea:focus {
     outline: 1px solid #A6E61C;
   }
 
@@ -329,16 +337,22 @@ header {
     margin-bottom: 15px;
   }
 
-  .uploadText label, .uploadText input, .uploadText select {
+  .uploadText label, .uploadText input, .uploadText select, .uploadText textarea {
     display: block;
     margin-bottom: 10px;
   }
 
-  .uploadText input[type="text"], .uploadText input[type="number"], .uploadText select {
+  .uploadText input[type="text"], .uploadText input[type="number"], .uploadText select, .uploadText textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+  }
+
+  input[type="text"]::placeholder,
+  input[type="number"]::placeholder,
+  textarea::placeholder {
+      color: #999;
   }
 
   /* saleinsert.html 등록하기 버튼 */
@@ -359,6 +373,19 @@ header {
     transition: background-color 0.3s ease;
   }
 
+  .uploadText .saleInsertBtn-Container button:hover {
+    background-color: #55E61C;
+    color: #fff;
+  }
+
+  .uploadText .saleInsertBtn-Container button:focus {
+      outline: 1px solid #A6E61C;
+  }
+
+  .uploadText .saleInsertBtn-Container button:active{
+      background-color: #55E61C;
+  }
+
   /* saleupdate.html 수정, 취소하기 버튼 */
   .uploadText .saleUpdateBtn-Container {
     display: flex;
@@ -375,4 +402,17 @@ header {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+  }
+
+  .uploadText .saleUpdateBtn-Container button:hover {
+    background-color: #55E61C;
+    color: #fff;
+  }
+
+  .uploadText .saleUpdateBtn-Container button:focus {
+      outline: 1px solid #A6E61C;
+  }
+
+  .uploadText .saleUpdateBtn-Container button:active{
+      background-color: #55E61C;
   }
