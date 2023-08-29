@@ -4,9 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.domain.community.dto.ResCommunityDTO;
 import com.example.farmerstroy.domain.community.service.CommunityService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -25,7 +27,11 @@ public class CommunityController {
 
     // 커뮤니티 작성하기 페이지
     @GetMapping("/communityinsert")
-    public String communityInsertPage(){
+    public String communityInsertPage(HttpSession session){
+        LoginUserDTO loginUser = (LoginUserDTO)session.getAttribute("dto");
+        if (loginUser == null) {
+            return "redirect:/community";
+        }
         return "communityinsert";
     }
 }

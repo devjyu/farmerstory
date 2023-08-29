@@ -64,7 +64,7 @@
       </div>
       <div class="mainContainer">
         <div class="writeBtn" th:if="${session.dto != null}">
-          <button type="button" th:if="${session.dto.user.authority != 2}" onclick="goWrite()">작성하기</button>
+          <button type="button" onclick="goWrite()">작성하기</button>
         </div>
         <div>
           <table>
