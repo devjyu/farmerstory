@@ -21,9 +21,11 @@ public class CommunityService {
     // 커뮤니티 전체 게시글 가져오기
     public ResCommunityDTO getCommunityData() {
         List<CommunityEntity> communityEntityList = communityRepository.findAll();
-        ResCommunityDTO dto = ResCommunityDTO.builder()
-        .communityList(ResCommunityDTO.Community.fromEntityList(communityEntityList))
-        .build();
+        ResCommunityDTO dto = ResCommunityDTO.of(communityEntityList);
+        System.out.println(dto.getCommunityList().get(0) + "이건");
+        // ResCommunityDTO dto = ResCommunityDTO.builder()
+        // .communityList(ResCommunityDTO.Community.fromEntityList(communityEntityList))
+        // .build();
         return dto;
     }
 }

@@ -21,6 +21,7 @@ public class CommunityController {
     @GetMapping("/community")
     public String communityPage(Model model){
         ResCommunityDTO resCommunityDTOList = communityService.getCommunityData();
+        System.out.println(resCommunityDTOList + "뭐라고");
         model.addAttribute("resCommunityDTOList", resCommunityDTOList);
         return "community";
     }

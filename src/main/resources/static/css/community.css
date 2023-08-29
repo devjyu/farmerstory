@@ -58,6 +58,16 @@
     background-color: #ddd;
   }
 
+  td span img{
+    width: 13px;
+    height: 13px;
+  }
+
+  td .userPost{
+    color: #999;
+    font-size: 12px;
+  }
+
   /* comunityinsert.html */
   .wirteContainer {
     padding: 50px 0;
