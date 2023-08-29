@@ -120,7 +120,7 @@
             <label for="post-content">내용</label>
             <textarea id="communityContent" rows="5" placeholder="1000이내로 내용을 입력해주세요"></textarea>
             <button type="button">등록하기</button>
-            <button type="button">취소하기</button>
+            <button type="button" onclick="goCommunity()">취소하기</button>
         </div>
       </div>
       <footer>
@@ -164,5 +164,10 @@
     const logout = () => {
       location.replace("/logout");
     };
+
+    // 취소하기
+    const goCommunity = () => {
+        location.replace("/community");
+    }
 </script>
 </html>
