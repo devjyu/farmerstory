@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/sale.css">
+    <link rel="stylesheet" href="/css/community.css">
     <title>Farmer's Story 커뮤니티</title>
 </head>
 <body>
@@ -63,7 +64,7 @@
       </div>
       <div class="mainContainer">
         <div class="writeBtn">
-          <button>작성하기</button>
+          <button type="button" onclick="goWrite()">작성하기</button>
         </div>
         <div>
           <table>
@@ -127,5 +128,10 @@
     const logout = () => {
       location.replace("/logout");
     };
+
+    // 작성하기
+    const goWrite = () => {
+      location.replace("/communityinsert");
+    }
 </script>
 </html>
