@@ -6,29 +6,63 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/sale.css">
     <style>
+        .mainContainer{
+          padding: 50px 0;
+        }
+
+        .writeBtn {
+          width: 80%;
+          margin: 20px auto;
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .writeBtn button {
+          padding: 8px 40px;
+          background-color: #90FC2B;
+          border: none;
+          border-radius: 20px;
+          color: #333;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s, color 0.3s;
+        }
+
+        .writeBtn button:hover {
+          background-color: #55E61C;
+          color: #fff;
+        }
+
+        .writeBtn button:focus {
+          outline: 1px solid #A6E61C;
+        }
+
+        .writeBtn button:active{
+          background-color: #55E61C;
+        }
+
         table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
+          width: 80%;
+          margin: 20px auto;
+          border-collapse: collapse;
         }
 
         th, td {
-            padding: 10px;
-            text-align: left;
+          padding: 10px;
+          text-align: left;
         }
 
         th {
-            background-color: #333;
-            color: #fff;
+          background-color: #4CAF50;
+          color: #fff;
         }
 
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+          background-color: #f2f2f2;
         }
 
         tr:hover {
-            background-color: #ddd;
+          background-color: #ddd;
         }
     </style>
     <title>Farmer's Story 커뮤니티</title>
@@ -88,30 +122,29 @@
         </ul>
       </div>
       <div class="mainContainer">
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th>Date</th>
-                    <th>Author</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>First Post</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                    <td>August 28, 2023</td>
-                    <td>John Doe</td>
-                </tr>
-                <tr>
-                    <td>Second Post</td>
-                    <td>Proin nec bibendum lorem, sit amet posuere risus.</td>
-                    <td>August 29, 2023</td>
-                    <td>Jane Smith</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="writeBtn">
+          <button>작성하기</button>
+        </div>
+        <div>
+          <table>
+              <thead>
+                  <tr>
+                      <th>제목</th>
+                      <th>내용</th>
+                      <th>작성일</th>
+                      <th>작성자</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr th:each="community : ${resCommunityDTOList.communityList}">
+                      <td th:text="${community.title}"></td>
+                      <td th:text="${community.content}"></td>
+                      <td th:text="${community.createDate}"></td>
+                      <td th:text="${community.userId}"></td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
       </div>
       <footer>
         <div>
