@@ -175,3 +175,119 @@
   .writeBtn button:active{
       background-color: #55E61C;
   }
+
+  /* communitydetail.html */
+  .postContainer {
+    max-width: 800px;
+    margin: 50px auto 20px auto;
+    padding: 30px 30px 20px 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+  }
+
+  .post-info {
+      font-size: 14px;
+      color: #777;
+  }
+
+  .post-content {
+      margin-top: 20px;
+      line-height: 1.6;
+  }
+
+  .post-content p {
+      margin-bottom: 10px;
+  }
+
+  .post-content p img {
+      width: 100%;
+  }
+
+  .buttonContainer{
+      max-width: 800px;
+      margin: 0 auto 50px auto;
+      display: flex;
+      justify-content: center;
+  }
+
+  .buttonContainer button{
+      padding: 8px 40px;
+      background-color: #90FC2B;
+      border: none;
+      border-radius: 20px;
+      color: #333;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      margin-top: 10px;
+  }
+
+  .buttonContainer button:hover {
+      background-color: #55E61C;
+      color: #fff;
+  }
+
+  .buttonContainer button:focus {
+      outline: 1px solid #A6E61C;
+  }
+
+  .buttonContainer button:active{
+      background-color: #55E61C;
+  }
+
+  .commentsContainer {
+      max-width: 800px;
+      margin: 0 auto 150px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .comments h2{
+      padding-bottom: 10px;
+  }
+
+  .comment {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background-color: #fff;
+  }
+
+  .comment-author {
+      font-weight: bold;
+      color: #333;
+  }
+
+  .comment-text {
+      margin-top: 5px;
+      color: #555;
+  }
+
+  .comment-form {
+      margin-top: 30px;
+      padding: 10px;
+      border: 1px solid #ddd;
+  }
+
+  .comment-form label {
+      font-weight: bold;
+  }
+
+  .comment-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+  }
+
+  .comment-form button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+  }
