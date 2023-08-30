@@ -3,9 +3,7 @@ package com.example.farmerstroy.domain.community.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.example.farmerstroy.domain.sale.dto.ResSaleDTO;
 import com.example.farmerstroy.model.community.entity.CommunityEntity;
-import com.example.farmerstroy.model.sale.entity.SaleEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
