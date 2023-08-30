@@ -81,19 +81,15 @@
                   <td th:text="${community.title}"></td>
                   <td th:if="${session.dto == null}">
                     <a href="javascript:void(0);" th:text="${community.title}" th:onclick="goCommunityDetail([[${community.idx}]])"></a>
-                    <!-- <span th:text="${community.content}"></span> -->
                     <span th:if="${community.communityImg != null}"><img src="/img/attachment.png" alt="첨부파일"></span>
                   </td>
                   <td th:if="${session.dto != null}">
-                    <span th:text="${community.content}"></span>
+                    <a href="javascript:void(0);" th:text="${community.title}" th:onclick="goCommunityDetail([[${community.idx}]])"></a>
                     <span th:if="${community.communityImg != null}"><img src="/img/attachment.png" alt="첨부파일"></span>
                     <span class="userPost" th:if="${community.userId == session.dto.user.id}">[내가 작성한 글]</span>
                   </td>
                   <td th:text="${community.createDate}"></td>
                   <td th:text="${community.userId}"></td>
-                  <!-- <td>
-                    <a th:href="@{/community/{id}(id=${community.id})}" th:text="${community.title}"></a>
-                  </td> -->
                 </tr>
               </tbody>
           </table>
