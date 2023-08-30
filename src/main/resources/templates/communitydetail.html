@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/sale.css">
     <link rel="stylesheet" href="/css/community.css">
     <style>
-        .container {
+        .postContainer {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
@@ -30,6 +30,14 @@
             line-height: 1.6;
         }
 
+        .commentsContainer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
         .comments {
             margin-top: 40px;
         }
@@ -49,6 +57,31 @@
         .comment-text {
             margin-top: 5px;
             color: #555;
+        }
+
+        .comment-form {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .comment-form label {
+            font-weight: bold;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        .comment-form button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
         }
     </style>
     <title>Farmer's Story 커뮤니티 상세페이지</title>
@@ -107,15 +140,19 @@
           <li><a href="javascript:logout();">로그아웃</a></li>
         </ul>
       </div>
-      <div class="container">
-        <h1>Post Title</h1>
+      <div class="postContainer" th:each="communityDetail : ${resCommunityDetail.community}">
+        <h1 th:text="${communityDetail.title}">Post Title</h1>
         <div class="post-info">
-            <span>Posted by John Doe on August 30, 2023</span>
+            Posted by <span th:text="${communityDetail.userId}"></span> on <span th:text="${communityDetail.createDate}"></span>
         </div>
         <div class="post-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula velit eu tincidunt. Cras eu quam vel turpis vehicula dignissim.</p>
-            <p>Quisque in nunc non justo placerat hendrerit. Fusce efficitur tortor nec mauris dictum, in aliquet elit tristique.</p>
+            <p th:text="${communityDetail.content}"></p>
+            <p>
+                <img th:src="${communityDetail.communityImg}" alt="attachmentImage">
+            </p>
         </div>
+      </div>
+      <div class="commentsContainer">
         <div class="comments">
             <h2>Comments</h2>
             <div class="comment">
@@ -126,6 +163,22 @@
                 <div class="comment-author">Bob</div>
                 <div class="comment-text">Thanks for sharing this information.</div>
             </div>
+        </div>
+        <div class="comment-form">
+            <h3>Add a Comment</h3>
+            <form>
+                <div>
+                    <label for="comment-author">Name:</label>
+                    <input type="text" id="comment-author" required>
+                </div>
+                <div>
+                    <label for="comment-text">Comment:</label>
+                    <textarea id="comment-text" rows="4" required></textarea>
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
         </div>
       </div>
       <footer>
