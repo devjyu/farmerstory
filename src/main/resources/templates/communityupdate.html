@@ -1,11 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/sale.css">
+    <link rel="stylesheet" href="/css/community.css">
     <title>Farmer's Story 커뮤니티 수정페이지</title>
 </head>
 <body>
-    
+    <header>
+        <div>
+          <a href="/main">
+            <img src="/img/logo.png" alt="로고" />
+          </a>
+        </div>
+        <div>
+          <ul>
+            <li>
+                <a href="/main">홈</a>
+            </li>
+            <li>일기쓰기</li>
+            <li>
+                <a href="/community">커뮤니티</a>
+            </li>
+            <li>
+                <a href="/sale">작물판매</a>
+            </li>
+        </ul>
+        </div>
+        <div class="userTag">
+          <ul th:if="${session.dto != null}">
+            <li>
+              <div class="userProfile">
+                <img th:src="${session.dto.user.profileImg}" alt="프로필" />
+              </div>
+            </li>
+            <li class="userNicknameText">
+              <span th:text="${session.dto.user.nickname}"></span>님 환영합니다!
+            </li>
+            <li class="sideMenuLi">
+              <span onclick="openSideMenu()">&#9776;</span>
+            </li>
+          </ul>
+          <ul th:if="${session.dto == null}">
+            <a href="/login">
+              <li class="userTagText">로그인</li>
+            </a>
+            <a href="/join">
+              <li class="userTagText">회원가입</li>
+            </a>
+          </ul>
+        </div>
+      </header>
+      <div id="sideMenu" class="side-menu" th:if="${session.dto != null}">
+        <a href="#" class="close-btn" onclick="closeSideMenu()">&times;</a>
+        <ul class="side-menu-links">
+          <li><a href="/saleinsert" th:if="${session.dto.user.authority == 1}">상품등록하기</a></li>
+          <li><a href="#">개인정보수정</a></li>
+          <li><a href="#">장바구니</a></li>
+          <li><a href="javascript:logout();">로그아웃</a></li>
+        </ul>
+      </div>
+      <div class="wirteContainer">
+        <div class="writeText">
+            <h1>게시글 작성하기</h1>
+        </div>
+        <div class="writeTextContainer">
+            <label for="post-title">제목</label>
+            <input type="text" id="communityTitle" placeholder="제목을 입력해주세요">
+            <label for="post-content">내용</label>
+            <textarea id="communityContent" rows="5" placeholder="1000이내로 내용을 입력해주세요"></textarea>
+            <label>이미지 등록하기</label>
+            <input type="file" id="file">
+            <div class="fileInputImg">
+                <img id="preview" src="" alt="" width="100%">
+            </div>
+            <div class="buttonContainer">
+                <button type="button" onclick="requestCommunity()">등록하기</button>
+                <button type="button" onclick="goCommunity()">취소하기</button>
+            </div>
+        </div>
+      </div>
+      <footer>
+        <div>
+            <img src="/img/logo_name.png" alt="로고">
+        </div>
+        <div>
+            <ul>
+                <li>
+                    <a href="https://velog.io/@devjyu" target="_blank">
+                        <img src="/img/velog_icon.png" alt="velog"></li>
+                    </a>
+                <li>
+                    <a href="https://github.com/devjyu" target="_blank">
+                        <img src="/img/github_icon2.png" alt="github"></li>
+                    </a>
+                <li>
+                    <a href="">
+                        <img src="/img/instagram_icon2.png" alt="instagram">    
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h5>(C)Copyright.Developer devjyu</h5>
+        </div>
+    </footer>
 </body>
+<script>
+    // 사이드 메뉴 열기
+    function openSideMenu() {
+      document.getElementById("sideMenu").classList.add("open");
+    }
+
+    // 사이드 메뉴 닫기
+    function closeSideMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+    }
+
+    // 로그아웃하기
+    const logout = () => {
+      location.replace("/logout");
+    };
+</script>
 </html>

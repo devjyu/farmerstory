@@ -14,6 +14,7 @@ import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.common.dto.ResponseDTO;
 import com.example.farmerstroy.common.exception.BadRequestException;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityInsertDTO;
+import com.example.farmerstroy.domain.community.dto.ReqCommunityUpdateDTO;
 import com.example.farmerstroy.model.community.entity.CommunityEntity;
 import com.example.farmerstroy.model.community.repository.CommunityRepository;
 import com.example.farmerstroy.model.user.entity.UserEntity;
@@ -75,6 +76,42 @@ public class CommunityServiceApiV1 {
             .message("게시글 작성에 성공했습니다.")
             .build()
             ,HttpStatus.OK  
+        );
+    }
+
+    @Transactional
+    public ResponseEntity<?> updateCommunityTable(Long idx, ReqCommunityUpdateDTO dto, LoginUserDTO loginUserDTO) throws IOException {
+        Optional<CommunityEntity> communityEntityOptional = communityRepository.findByIdx(idx);
+
+        if (communityEntityOptional.isEmpty()) {
+            throw new BadRequestException("해당 하는 게시글이 없습니다.");
+        }
+
+        CommunityEntity communityEntity = communityEntityOptional.get();
+
+        if (!communityEntity.getUserEntity().getIdx().equals(loginUserDTO.getUser().getIdx())) {
+            throw new BadRequestException("권한이 없습니다.");
+        }
+
+        String communityImg = null;
+
+        if (dto.getCommunityImg() != null) {
+            String imgBase64 = Base64.getEncoder().encodeToString(dto.getCommunityImg().getBytes());
+            communityImg = "data:" + dto.getCommunityImg() + ";base64," + imgBase64;
+            System.out.println("사진" + communityImg);
+        }
+
+        communityEntity.setIdx(dto.getIdx());
+        communityEntity.setTitle(dto.getTitle());
+        communityEntity.setContent(dto.getContent());
+        communityEntity.setCommunityImg(communityImg);
+
+        return new ResponseEntity<>(
+            ResponseDTO.builder()
+                .code(0)
+                .message("게시글 수정에 성공했습니다.")
+                .build()
+            ,HttpStatus.OK
         );
     }
 }

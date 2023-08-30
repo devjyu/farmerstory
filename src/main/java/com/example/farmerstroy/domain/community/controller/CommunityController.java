@@ -45,4 +45,10 @@ public class CommunityController {
         model.addAttribute("resCommunityDetail", resCommunityDetail);
         return "communitydetail";
     }
+
+    // 커뮤니티 게시글 수정하기
+    @GetMapping("/community/communitydetail/{communityIdx}")
+    public String communityUpdatePage(@PathVariable Long communityIdx, Model model, HttpSession session) {
+        return "communityupdate";
+    }
 }

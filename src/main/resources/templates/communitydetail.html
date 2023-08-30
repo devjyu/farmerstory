@@ -62,26 +62,30 @@
           <li><a href="javascript:logout();">로그아웃</a></li>
         </ul>
       </div>
-      <div class="postContainer" th:each="communityDetail : ${resCommunityDetail.community}">
-        <h1 th:text="${communityDetail.title}">Post Title</h1>
-        <div class="post-info">
-            Posted by <span th:text="${communityDetail.userId}"></span> on <span th:text="${communityDetail.createDate}"></span>
+      <div th:each="communityDetail : ${resCommunityDetail.community}">
+        <div class="postContainer">
+            <h1 th:text="${communityDetail.title}"></h1>
+            <div class="post-info">
+                Posted by <span th:text="${communityDetail.userId}"></span> on <span th:text="${communityDetail.createDate}"></span>
+            </div>
+            <div class="post-content">
+                <p th:text="${communityDetail.content}"></p>
+                <p>
+                    <img th:src="${communityDetail.communityImg}" alt="attachmentImage">
+                </p>
+            </div>
         </div>
-        <div class="post-content">
-            <p th:text="${communityDetail.content}"></p>
-            <p>
-                <img th:src="${communityDetail.communityImg}" alt="attachmentImage">
-            </p>
+        <div class="buttonContainer" th:if="${session.dto == null}">
+            <button type="button" onclick="goCommunity()">목록</button>
         </div>
-      </div>
-      <div class="buttonContainer" th:if="${session.dto == null}">
-        <button type="button" onclick="goCommunity()">목록</button>
-      </div>
-      <div class="buttonContainer" th:if="${session.dto != null}">
-        <button type="button" onclick="goCommunity()">목록</button>
-        <button>수정하기</button>
-        <button>삭제하기</button>
-      </div>
+        <div class="buttonContainer" th:if="${session.dto != null}">
+            <button type="button" onclick="goCommunity()">목록</button>
+            <div th:if="${session.dto.user.id == communityDetail.userId}">
+                <button th:onclick="goCommunityUpdate([[${communityDetail.idx}]])">수정하기</button>
+                <button>삭제하기</button>
+            </div>
+        </div>
+      </div>  
       <div class="commentsContainer">
         <div class="comments">
             <h2>댓글</h2>
@@ -154,6 +158,11 @@
     // 커뮤니티 페이지 이동하기
     const goCommunity = () => {
         location.replace("/community");
+    }
+
+    // 커뮤니티 수정페이지 이동하기
+    const goCommunityUpdate = (communityIdx) => {
+        location.href = "/community/communitydetail/" + communityIdx;
     }
 </script>
 </html>
