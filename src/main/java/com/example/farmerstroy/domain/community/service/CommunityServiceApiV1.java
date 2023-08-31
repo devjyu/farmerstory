@@ -116,4 +116,29 @@ public class CommunityServiceApiV1 {
             ,HttpStatus.OK
         );
     }
+
+    @Transactional
+    public ResponseEntity<?> deleteCommunityTable(Long idx, LoginUserDTO loginUserDTO) {
+        Optional<CommunityEntity> communityEntityOptional = communityRepository.findByIdx(idx);
+
+        if (communityEntityOptional.isEmpty()) {
+            throw new BadRequestException("해당 게시글이 없습니다.");
+        }
+
+        CommunityEntity communityEntity = communityEntityOptional.get();
+
+        if (!communityEntity.getUserEntity().getIdx().equals(loginUserDTO.getUser().getIdx())) {
+            throw new BadRequestException("권한이 없습니다.");
+        }
+
+        communityRepository.delete(communityEntity);
+
+        return new ResponseEntity<>(
+            ResponseDTO.builder()
+                .code(0)
+                .message("게시글 삭제에 성공했습니다.")
+                .build()
+            ,HttpStatus.OK
+        );
+    }
 }

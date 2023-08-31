@@ -82,7 +82,7 @@
             <button type="button" onclick="goCommunity()">목록</button>
             <div th:if="${session.dto.user.id == communityDetail.userId}" style="display: flex;">
                 <button th:onclick="goCommunityUpdate([[${communityDetail.idx}]])">수정</button>
-                <button>삭제</button>
+                <button th:onclick="deleteCommunity([[${communityDetail.idx}]])">삭제</button>
             </div>
         </div>
       </div>  
@@ -163,6 +163,25 @@
     // 커뮤니티 수정페이지 이동하기
     const goCommunityUpdate = (communityIdx) => {
         location.href = "/community/communitydetail/" + communityIdx;
+    }
+
+    // 삭제하기
+    const deleteCommunity = (communityIdx) => {
+      alert("정말 삭제하시겠습니까?");
+
+      fetch(`/api/v1/community/${communityIdx}`, {
+        method : "DELETE",
+        headers : {
+          'Content-Type' : 'application/json;charset=utf8',
+        },
+      })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result.message);
+        if (result.code == 0) {
+          location.replace("/community");
+        }
+      })
     }
 </script>
 </html>

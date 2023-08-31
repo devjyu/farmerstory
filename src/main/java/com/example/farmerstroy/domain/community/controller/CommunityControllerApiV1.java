@@ -3,6 +3,8 @@ package com.example.farmerstroy.domain.community.controller;
 import java.io.IOException;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityInsertDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityUpdateDTO;
+import com.example.farmerstroy.domain.community.dto.ResCommunityDetailDTO;
 import com.example.farmerstroy.domain.community.service.CommunityServiceApiV1;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,11 +33,17 @@ public class CommunityControllerApiV1 {
         return communityServiceApiV1.insertCommunityTable(dto, userDTO);
     }
 
-    // 게시글 수정하기기
+    // 게시글 수정하기
     @PutMapping
     public ResponseEntity<?> updateCommunityTable(Long idx, ReqCommunityUpdateDTO dto, HttpSession session) throws IOException {
         LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
         return communityServiceApiV1.updateCommunityTable(idx, dto, userDTO);
     }
     
+    // 게시글 삭제하기
+    @DeleteMapping("/{idx}")
+    public ResponseEntity<?> deleteCommunityTable(@PathVariable Long idx, ResCommunityDetailDTO dto, HttpSession session) {
+        LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
+        return communityServiceApiV1.deleteCommunityTable(idx, userDTO);
+    }
 }
