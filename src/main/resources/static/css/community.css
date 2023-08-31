@@ -150,6 +150,7 @@
   .writeTextContainer .buttonContainer{
       display: flex;
       justify-content: end;
+      margin-bottom: 0px;
   }
   .writeTextContainer .buttonContainer button {
       padding: 8px 40px;

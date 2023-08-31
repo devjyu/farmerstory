@@ -64,20 +64,21 @@
       </div>
       <div class="wirteContainer">
         <div class="writeText">
-            <h1>게시글 작성하기</h1>
+            <h1>게시글 수정하기</h1>
         </div>
-        <div class="writeTextContainer">
+        <div class="writeTextContainer" th:each="communityDetail : ${resCommunityDetail.community}">
+            <input type="hidden" th:value="${communityDetail.idx}" id="communityIdx">
             <label for="post-title">제목</label>
-            <input type="text" id="communityTitle" placeholder="제목을 입력해주세요">
+            <input type="text" id="communityTitle" th:value="${communityDetail.title}" placeholder="제목을 입력해주세요">
             <label for="post-content">내용</label>
-            <textarea id="communityContent" rows="5" placeholder="1000이내로 내용을 입력해주세요"></textarea>
+            <textarea id="communityContent" rows="5" th:text="${communityDetail.content}" placeholder="1000이내로 내용을 입력해주세요"></textarea>
             <label>이미지 등록하기</label>
-            <input type="file" id="file">
+            <input type="file" id="file" >
             <div class="fileInputImg">
-                <img id="preview" src="" alt="" width="100%">
+                <img id="preview" th:src="${communityDetail.communityImg}" alt="" width="100%">
             </div>
             <div class="buttonContainer">
-                <button type="button" onclick="requestCommunity()">등록하기</button>
+                <button type="button" onclick="requestCommunityUpdate()">수정하기</button>
                 <button type="button" onclick="goCommunity()">취소하기</button>
             </div>
         </div>
@@ -123,5 +124,88 @@
     const logout = () => {
       location.replace("/logout");
     };
+
+    // 취소하기
+    const goCommunity = () => {
+      location.replace("/community");
+    }
+
+    // 파일 업로드
+    const fileInput = document.getElementById('file');
+      const preview = document.getElementById('preview');
+
+      fileInput.addEventListener('change', function () {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            }
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+        }
+    });
+
+    // 게시글 수정
+    const requestCommunityUpdate = (communityIdx) => {
+      // 입력값 검증
+      if (!validateFields()) {
+          return;
+      }
+
+      const idxTag = document.querySelector("#communityIdx");
+      const titleTag = document.querySelector("#communityTitle");
+      const contentTag = document.querySelector("#communityContent");
+      const communityImg = document.querySelector("#file");
+      const previewImg = document.getElementById("preview");
+
+      const formData = new FormData();
+
+      formData.append("idx", idxTag.value);
+      formData.append("title", titleTag.value);
+      formData.append("content", contentTag.value);
+      
+      if (communityImg.files.length > 0) {
+          formData.append("communityImg", communityImg.files[0]);
+      } else {
+        // const srcValue = previewImg.src;
+        formData.append("communityImg", previewImg.src);
+      }
+
+      fetch("/api/v1/community", {
+          method : "PUT",
+          body : formData
+      })
+      .then((res) => res.json())
+      .then((result) => {
+          alert(result.message);
+          if (result.code === 0) {
+              location.replace("/community");
+          }
+      })
+    };
+
+    // 유효성 검사
+    const validateFields = () => {
+      const communityTitleElement = document.querySelector("#communityTitle");
+      const communityContentElement = document.querySelector("#communityContent");
+
+      if (communityTitleElement.value === "") {
+          alert("제목을 확인해주세요");
+          communityTitleElement.focus();
+          return false;
+      }
+
+      if (communityContentElement.value === "") {
+          alert("내용을 확인해주세요");
+          communityContentElement.focus();
+          return false;
+      }
+
+      return true;
+    }
 </script>
 </html>

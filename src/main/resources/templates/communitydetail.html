@@ -80,9 +80,9 @@
         </div>
         <div class="buttonContainer" th:if="${session.dto != null}">
             <button type="button" onclick="goCommunity()">목록</button>
-            <div th:if="${session.dto.user.id == communityDetail.userId}">
-                <button th:onclick="goCommunityUpdate([[${communityDetail.idx}]])">수정하기</button>
-                <button>삭제하기</button>
+            <div th:if="${session.dto.user.id == communityDetail.userId}" style="display: flex;">
+                <button th:onclick="goCommunityUpdate([[${communityDetail.idx}]])">수정</button>
+                <button>삭제</button>
             </div>
         </div>
       </div>  

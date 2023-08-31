@@ -99,7 +99,9 @@ public class CommunityServiceApiV1 {
             String imgBase64 = Base64.getEncoder().encodeToString(dto.getCommunityImg().getBytes());
             communityImg = "data:" + dto.getCommunityImg() + ";base64," + imgBase64;
             System.out.println("사진" + communityImg);
-        }
+        } 
+    
+        System.out.println("사진" + communityImg);
 
         communityEntity.setIdx(dto.getIdx());
         communityEntity.setTitle(dto.getTitle());

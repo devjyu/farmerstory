@@ -49,6 +49,12 @@ public class CommunityController {
     // 커뮤니티 게시글 수정하기
     @GetMapping("/community/communitydetail/{communityIdx}")
     public String communityUpdatePage(@PathVariable Long communityIdx, Model model, HttpSession session) {
+        ResCommunityDetailDTO resCommunityDetail = communityService.getCommunityDetailData(communityIdx);
+        model.addAttribute("resCommunityDetail", resCommunityDetail);
+        LoginUserDTO loginUser = (LoginUserDTO)session.getAttribute("dto");
+        if (loginUser == null) {
+            return "redirect:/community";
+        }
         return "communityupdate";
     }
 }
