@@ -6,6 +6,42 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/sale.css">
     <link rel="stylesheet" href="/css/community.css">
+    <style>
+      .edit-button, .delete-button {
+          background-color: white; /* Button background color */
+          border: none; /* Remove button border */
+          cursor: pointer; /* Change cursor to pointer on hover */
+      }
+
+      .edit-comment {
+          display: none;
+          margin-top: 10px;
+      }
+
+      .edit-comment textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+      }
+
+      .editCommentBtncontainer {
+        display: flex;
+        justify-content: end;
+      }
+
+      .edit-comment .ceditCommentBtncontainer button {
+        padding: 8px 25px;
+        background-color: #90FC2B;
+        border: none;
+        border-radius: 20px;
+        color: #333;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        margin-top: 10px;
+      }
+    </style>
     <title>Farmer's Story 커뮤니티 상세페이지</title>
 </head>
 <body>
@@ -95,6 +131,15 @@
                 <input type="hidden" th:value="${commentList.communityIdx}" id="commentCommunityIdx">
                 <div class="comment-text" th:text="${commentList.content}"></div>
                 <div class="commentDate" th:text="${commentList.createDate}"></div>
+              </div>
+              <button class="edit-button" onclick="editComment()">[수정]</button>
+              <button class="delete-button">[삭제]</button>
+              <div class="edit-comment">
+                <textarea rows="3" placeholder="300자 이내로 내용을 입력해주세요"></textarea>
+                <div class="editCommentBtncontainer">
+                  <button type="button">저장</button>
+                  <button type="button">취소</button>
+                </div>
               </div>
           </div>
         </div>
@@ -231,6 +276,19 @@
       }
 
       return true;
+    }
+
+    // 댓글 수정 버튼 클릭 시 수정 div나오게 하기
+    const editComment = () => {
+      const editCommentDivs = document.querySelectorAll('.edit-comment');
+
+      editCommentDivs.forEach(div => {
+          if (div.style.display == 'none') {
+              div.style.display = 'none';
+          } else {
+              div.style.display = 'block';
+          }
+      });
     }
 </script>
 </html>
