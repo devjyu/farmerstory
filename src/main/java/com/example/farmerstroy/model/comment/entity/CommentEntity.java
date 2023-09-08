@@ -1,6 +1,6 @@
 package com.example.farmerstroy.model.comment.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.example.farmerstroy.model.community.entity.CommunityEntity;
 import com.example.farmerstroy.model.user.entity.UserEntity;
@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "comment")
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 public class CommentEntity {
 
     @Id
@@ -36,7 +38,7 @@ public class CommentEntity {
     private String content;
 
     @Column(name = "create_date", nullable = false)
-    private LocalDateTime createDate;
+    private LocalDate createDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx", referencedColumnName = "idx", updatable = false, nullable = false)

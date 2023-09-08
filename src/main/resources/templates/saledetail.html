@@ -63,11 +63,11 @@
                 <li><a href="javascript:logout();">로그아웃</a></li>
             </ul>
         </div>
-        <div class="saleDetail">
+        <div class="saleDetail" th:each="saleDetail : ${resSaleDetailList.sale}">
             <div class="saleDetailImg">
-                <img src="http://via.placeholder.com/400x450" alt="">
+                <img th:src="${saleDetail.saleImg}" alt="" style="height: 400px;">
             </div>
-            <div class="saleDetailTableIntroduce" th:each="saleDetail : ${resSaleDetailList.sale}">
+            <div class="saleDetailTableIntroduce">
                 <h1 th:text="${saleDetail.title}"></h1>
                 <table>
                     <caption>

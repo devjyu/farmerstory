@@ -133,16 +133,6 @@ public class SaleServiceApiV1 {
             throw new BadRequestException("카테고리 번호를 잘못 입력하셨습니다.");
         }
 
-        String saleImg = null;
-
-        if (dto.getSaleImg() != null) {
-            String imgBase64 = Base64.getEncoder().encodeToString(dto.getSaleImg().getBytes());
-            saleImg = "data:" + dto.getSaleImg().getContentType() + ";base64," + imgBase64;
-            System.out.println("사진" + saleImg);
-        } else {
-            saleImg = "http://via.placeholder.com/320x240";
-        }
-
         // System.out.println(dto.getSaleImg());
         // System.out.println("위에꺼");
         // SaleEntity updateSaleEntity = SaleEntity
@@ -159,13 +149,24 @@ public class SaleServiceApiV1 {
 
         // saleRepository.save(updateSaleEntity);
 
+        // 기존 이미지 값 유지
+        String saleImg = saleEntity.getSaleImg();
+
         saleEntity.setIdx(dto.getIdx());
         saleEntity.setName(dto.getName());
         saleEntity.setTitle(dto.getTitle());
         saleEntity.setIntroduction(dto.getIntroduction());
         saleEntity.setPrice(dto.getPrice());
         saleEntity.setAmount(dto.getAmount());
-        saleEntity.setSaleImg(saleImg);
+        if (dto.getSaleImg() != null) {
+            String imgBase64 = Base64.getEncoder().encodeToString(dto.getSaleImg().getBytes());
+            saleImg = "data:" + dto.getSaleImg().getContentType() + ";base64," + imgBase64;
+            saleEntity.setSaleImg(saleImg);
+            // System.out.println("사진" + saleImg);
+        } 
+        // else {
+        //     saleImg = "http://via.placeholder.com/320x240";
+        // }
         saleEntity.setCategoryEntity(categoryEntityOptional.get());
 
         return new ResponseEntity<>(

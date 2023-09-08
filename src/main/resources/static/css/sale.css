@@ -130,8 +130,9 @@ header {
   .saleDetail {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     padding: 50px;
+    margin: 50px 0px 100px 0px;
   }
 
   .saleDetail .saleDetailImg {
@@ -153,7 +154,6 @@ header {
     padding: 10px;
     width: 400px;
     text-align: inherit;
-    margin: 70px 0 0 20px;
   }
 
   .saleDetail h1 {
@@ -260,6 +260,7 @@ header {
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     padding: 50px;
+    margin: 50px 0px 100px 0px;
   }
 
   .uploadImg, .uploadText {

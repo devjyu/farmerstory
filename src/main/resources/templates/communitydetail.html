@@ -87,30 +87,26 @@
         </div>
       </div>  
       <div class="commentsContainer">
-        <div class="comments">
-            <h2>댓글</h2>
-            <div class="comment">
-                <div class="comment-author">Alice</div>
-                <div class="comment-text">Great post! I learned a lot from this.</div>
-            </div>
-            <div class="comment">
-                <div class="comment-author">Bob</div>
-                <div class="comment-text">Thanks for sharing this information.</div>
-            </div>
+        <h2>댓글</h2>
+        <div class="comments" th:each="commentList : ${resCommunityDetail.commentList}">
+          <div class="comment" th:if="${commentList != null}">
+              <div class="comment-author" th:text="${commentList.userId}"></div>
+              <div class="commentTextDate">
+                <input type="hidden" th:value="${commentList.communityIdx}" id="commentCommunityIdx">
+                <div class="comment-text" th:text="${commentList.content}"></div>
+                <div class="commentDate" th:text="${commentList.createDate}"></div>
+              </div>
+          </div>
         </div>
         <div class="comment-form">
-            <h3>Add a Comment</h3>
-            <div>
-                <label for="comment-author">Name:</label>
-                <input type="text" id="comment-author" required>
-            </div>
-            <div>
-                <label for="comment-text">Comment:</label>
-                <textarea id="comment-text" rows="4" required></textarea>
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
+          <h3>댓글 달기</h3>
+          <div>
+              <label for="commentText">내용</label>
+              <textarea id="commentText" rows="4" placeholder="300자 이내로 내용을 입력해주세요"></textarea>
+          </div>
+          <div class="commentBtnContainer">
+              <button type="button" onclick="requestComment()">등록하기</button>
+          </div>
         </div>
       </div>
       <footer>
@@ -165,7 +161,7 @@
         location.href = "/community/communitydetail/" + communityIdx;
     }
 
-    // 삭제하기
+    // 게시글 삭제하기
     const deleteCommunity = (communityIdx) => {
       alert("정말 삭제하시겠습니까?");
 
@@ -182,6 +178,59 @@
           location.replace("/community");
         }
       })
+    }
+
+    // 게시글 댓글 등록하기
+    const requestComment = () => {
+      if (!validateFields()) {
+        return;
+      }
+      const communityIdx = document.getElementById("commentCommunityIdx").value;
+      // console.log(document.querySelector("#commentText").value);
+      // const contentInput = document.querySelector("#commentText").value;
+      // const dto = {
+      //   content : contentInput,
+      //   communityIdx : communityIdx
+      // }
+      
+      const contentTag = document.querySelector("#commentText");
+      const communityIdxTag = document.querySelector("#commentCommunityIdx");
+
+      const formData = new FormData();
+
+      formData.append("content", contentTag.value);
+      formData.append("communityIdx", communityIdxTag.value);
+
+      // console.log(content);
+
+
+      fetch(`/api/v1/community/${communityIdx}`,{
+        method : "POST",
+        body : formData
+      })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result.message);
+        if (result.code === 0) {
+          location.href = "/community/" + communityIdx;
+        }
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    }
+
+    // 게시글 댓글 유효성 검사
+    const validateFields = () => {
+      const commentTextElement = document.querySelector("#commentText");
+
+      if (commentTextElement.value === "") {
+        alert("댓글 내용을 확인해주새요");
+        commentTextElement.focus();
+        return false;
+      }
+
+      return true;
     }
 </script>
 </html>

@@ -206,6 +206,7 @@
 
   .post-content p img {
       width: 100%;
+      border-radius: 20px;
   }
 
   .buttonContainer{
@@ -248,7 +249,7 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  .comments h2{
+  .commentsContainer h2{
       padding-bottom: 10px;
   }
 
@@ -264,15 +265,28 @@
       color: #333;
   }
 
+  .comment .commentTextDate{
+    display: flex;
+    justify-content: space-between;
+  }
+
   .comment-text {
       margin-top: 5px;
       color: #555;
   }
 
+  .commentDate{
+    margin-top: 5px;
+    color: #555;
+  }
+
   .comment-form {
-      margin-top: 30px;
       padding: 10px;
       border: 1px solid #ddd;
+  }
+
+  .comment-form h3 {
+    margin-bottom: 5px;
   }
 
   .comment-form label {
@@ -283,12 +297,40 @@
       width: 100%;
       padding: 10px;
       margin-top: 5px;
+      border-radius: 5px;
   }
 
-  .comment-form button {
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
+  textarea::placeholder {
+    color: #999;
+  }
+
+  .comment-form .commentBtnContainer {
+    display: flex;
+    justify-content: end;
+  }
+
+  .comment-form .commentBtnContainer button {
+    padding: 8px 25px;
+    background-color: #90FC2B;
+    border: none;
+    border-radius: 20px;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 10px;
+  }
+
+  .comment-form .commentBtnContainer button:hover {
+    background-color: #55E61C;
+    color: #fff;
+  }
+
+  .comment-form .commentBtnContainer button:focus,
+  textarea:focus {
+      outline: 1px solid #A6E61C;
+  }
+
+  .comment-form .commentBtnContainer button:active{
+      background-color: #55E61C;
   }

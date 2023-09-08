@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.farmerstroy.common.dto.LoginUserDTO;
+import com.example.farmerstroy.domain.community.dto.ReqCommentInsertDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityInsertDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityUpdateDTO;
 import com.example.farmerstroy.domain.community.dto.ResCommunityDetailDTO;
@@ -45,5 +47,18 @@ public class CommunityControllerApiV1 {
     public ResponseEntity<?> deleteCommunityTable(@PathVariable Long idx, ResCommunityDetailDTO dto, HttpSession session) {
         LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
         return communityServiceApiV1.deleteCommunityTable(idx, userDTO);
+    }
+
+    // @GetMapping
+    // public ResponseEntity<?> getCommentListByCommunityIdx(@PathVariable Long communityIdx) {
+    //     return communityServiceApiV1.getCommentListByCommunityIdx(communityIdx);
+    // }
+
+    // 게시글 댓글 등록하기
+    @PostMapping("/{idx}")
+    public ResponseEntity<?> insertCommentTable(@PathVariable Long idx ,ReqCommentInsertDTO dto, HttpSession session) {
+
+        LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
+        return communityServiceApiV1.insertCommentTable(idx, dto, userDTO);
     }
 }

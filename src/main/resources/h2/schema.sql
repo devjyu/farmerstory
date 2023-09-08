@@ -57,6 +57,18 @@ CREATE TABLE `community` (
   FOREIGN KEY (`user_idx`) REFERENCES `user` (`idx`)
 );
 
+-- farmerstory.comment definition
+CREATE TABLE `comment` (
+  `idx` int NOT NULL AUTO_INCREMENT COMMENT 'Comment Number',
+  `content` varchar(300) NOT NULL COMMENT 'Comment Content',
+  `create_date` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Comment Creation Date',
+  `user_idx` int NOT NULL COMMENT 'User Number who wrote the Comment',
+  `community_idx` int NOT NULL COMMENT 'Community Post Number',
+  PRIMARY KEY (`idx`),
+  FOREIGN KEY (`user_idx`) REFERENCES `user` (`idx`),
+  FOREIGN KEY (`community_idx`) REFERENCES `community` (`idx`)
+);
+
 -- -- farmerstory.diary definition
 -- CREATE TABLE `diary` (
 --   `idx` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Diary Number',
@@ -70,19 +82,8 @@ CREATE TABLE `community` (
 -- );
 
 
--- -- farmerstory.comment definition
--- CREATE TABLE `comment` (
---   `idx` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Comment Number',
---   `content` varchar(200) NOT NULL COMMENT 'Comment Content',
---   `create_date` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Comment Creation Date',
---   `user_idx` int(11) NOT NULL COMMENT 'User Number who wrote the Comment',
---   `community_idx` int(11) NOT NULL COMMENT 'Community Post Number',
---   PRIMARY KEY (`idx`),
---   KEY `comment_FK` (`user_idx`),
---   KEY `comment_FK_1` (`community_idx`),
---   CONSTRAINT `comment_FK` FOREIGN KEY (`user_idx`) REFERENCES `user` (`idx`),
---   CONSTRAINT `comment_FK_1` FOREIGN KEY (`community_idx`) REFERENCES `community` (`idx`)
--- );
+
+
 
 
 
