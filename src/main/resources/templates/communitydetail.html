@@ -135,9 +135,9 @@
               <button class="edit-button" onclick="editComment()">[수정]</button>
               <button class="delete-button">[삭제]</button>
               <div class="edit-comment">
-                <textarea rows="3" placeholder="300자 이내로 내용을 입력해주세요"></textarea>
+                <textarea id="updateCommentText" rows="3" placeholder="300자 이내로 내용을 입력해주세요"></textarea>
                 <div class="editCommentBtncontainer">
-                  <button type="button">저장</button>
+                  <button type="button" onclick="requestCommentUpdate()">저장</button>
                   <button type="button">취소</button>
                 </div>
               </div>
@@ -289,6 +289,49 @@
               div.style.display = 'block';
           }
       });
+    }
+
+    // 게시글 댓글 수정하기
+    const requestCommentUpdate = () => {
+      if (!updateValidateFields()) {
+        return;
+      }
+      const updateCommunityIdx = document.getElementById("commentCommunityIdx").value;
+      const updateContentTag = document.querySelector("#updateCommentText");
+
+      const formData = new FormData();
+
+      formData.append("content", updateContentTag.value);
+
+      // console.log(content);
+
+      fetch(`/api/v1/community/${updateCommunityIdx}`,{
+        method : "PUT",
+        body : formData
+      })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result.message);
+        if (result.code === 0) {
+          location.href = "/community/" + updateCommunityIdx;
+        }
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    }
+
+    // 게시글 댓글 수정 유효성 검사
+    const updateValidateFields = () => {
+      const updateCommentTextElement = document.querySelector("#updateCommentText");
+
+      if (updateCommentTextElement.value === "") {
+        alert("댓글 내용을 확인해주새요");
+        updateCommentTextElement.focus();
+        return false;
+      }
+
+      return true;
     }
 </script>
 </html>

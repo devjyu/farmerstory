@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommentInsertDTO;
+import com.example.farmerstroy.domain.community.dto.ReqCommentUpdateDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityInsertDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityUpdateDTO;
 import com.example.farmerstroy.domain.community.dto.ResCommunityDetailDTO;
@@ -49,10 +50,16 @@ public class CommunityControllerApiV1 {
     }
 
     // 게시글 댓글 등록하기
-    @PostMapping("/{idx}")
-    public ResponseEntity<?> insertCommentTable(@PathVariable Long idx ,ReqCommentInsertDTO dto, HttpSession session) {
-
+    @PostMapping("/{commentIdx}")
+    public ResponseEntity<?> insertCommentTable(@PathVariable Long commentIdx ,ReqCommentInsertDTO dto, HttpSession session) {
         LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
-        return communityServiceApiV1.insertCommentTable(idx, dto, userDTO);
+        return communityServiceApiV1.insertCommentTable(commentIdx, dto, userDTO);
+    }
+
+    // 게시글 댓글 수정하기
+    @PutMapping("/{commentIdx}")
+    public ResponseEntity<?> updateCommentTable(@PathVariable Long commentIdx, ReqCommentUpdateDTO dto, HttpSession session) {
+        LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
+        return communityServiceApiV1.updateCommentTable(commentIdx, dto, userDTO);
     }
 }

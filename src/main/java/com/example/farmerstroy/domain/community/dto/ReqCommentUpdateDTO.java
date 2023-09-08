@@ -15,14 +15,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ReqCommentInsertDTO {
+public class ReqCommentUpdateDTO {
 
-    
-        @NotBlank(message = "내용을 입력해주세요")
-        @Size(min = 1, max = 300, message = "300자 이하로 입력해주세요")
-        private String content;
-
-        private Long communityIdx;
-
+    @NotBlank(message = "내용을 입력해주세요")
+    @Size(min = 1, max = 300, message = "300자 이하로 입력해주세요")
+    private String content;
 
 }

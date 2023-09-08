@@ -14,6 +14,7 @@ import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.common.dto.ResponseDTO;
 import com.example.farmerstroy.common.exception.BadRequestException;
 import com.example.farmerstroy.domain.community.dto.ReqCommentInsertDTO;
+import com.example.farmerstroy.domain.community.dto.ReqCommentUpdateDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityInsertDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityUpdateDTO;
 import com.example.farmerstroy.model.comment.entity.CommentEntity;
@@ -152,7 +153,7 @@ public class CommunityServiceApiV1 {
     // 게시글 댓글 등록하기
     @Transactional
     public ResponseEntity<?> insertCommentTable(Long idx, ReqCommentInsertDTO dto, LoginUserDTO loginUserDTO) {
-        System.out.println("dto는 무엇인가" + dto.getContent());
+        // System.out.println("dto는 무엇인가" + dto.getContent());
         if (dto == null ||  dto.getContent() == null || dto.getContent().equals("")) {
             throw new BadRequestException("정보를 입력해주세요");
         }
@@ -193,6 +194,32 @@ public class CommunityServiceApiV1 {
             .code(0)
             .message("댓글 등록에 성공했습니다.")
             .build(),HttpStatus.OK
+        );
+    }
+    
+    // 게시글 댓글 수정하기
+    @Transactional
+    public ResponseEntity<?> updateCommentTable(Long idx, ReqCommentUpdateDTO dto, LoginUserDTO loginUserDTO) {
+        Optional<CommentEntity> commentEntityOptional = commentRepository.findByIdx(idx);
+        
+        if (commentEntityOptional.isEmpty()) {
+            throw new BadRequestException("해당 댓글이 없습니다.");
+        }
+
+        CommentEntity commentEntity = commentEntityOptional.get();
+
+        if (!commentEntity.getUserEntity().getIdx().equals(loginUserDTO.getUser().getIdx())) {
+            throw new BadRequestException("해당 권한이 없습니다.");
+        }
+
+        commentEntity.setContent(dto.getContent());
+
+        return new ResponseEntity<>(
+            ResponseDTO.builder()
+                .code(0)
+                .message("댓글 수정에 성공했습니다.")
+                .build()
+            ,HttpStatus.OK
         );
     }
 }
