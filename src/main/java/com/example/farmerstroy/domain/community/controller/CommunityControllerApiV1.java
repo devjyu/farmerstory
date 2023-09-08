@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -48,11 +47,6 @@ public class CommunityControllerApiV1 {
         LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
         return communityServiceApiV1.deleteCommunityTable(idx, userDTO);
     }
-
-    // @GetMapping
-    // public ResponseEntity<?> getCommentListByCommunityIdx(@PathVariable Long communityIdx) {
-    //     return communityServiceApiV1.getCommentListByCommunityIdx(communityIdx);
-    // }
 
     // 게시글 댓글 등록하기
     @PostMapping("/{idx}")

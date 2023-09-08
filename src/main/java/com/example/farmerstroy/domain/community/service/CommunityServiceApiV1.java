@@ -3,7 +3,6 @@ package com.example.farmerstroy.domain.community.service;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Base64;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,6 @@ import com.example.farmerstroy.common.exception.BadRequestException;
 import com.example.farmerstroy.domain.community.dto.ReqCommentInsertDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityInsertDTO;
 import com.example.farmerstroy.domain.community.dto.ReqCommunityUpdateDTO;
-import com.example.farmerstroy.domain.community.dto.ResCommunityDetailDTO;
 import com.example.farmerstroy.model.comment.entity.CommentEntity;
 import com.example.farmerstroy.model.comment.repository.CommentRepository;
 import com.example.farmerstroy.model.community.entity.CommunityEntity;
@@ -150,21 +148,6 @@ public class CommunityServiceApiV1 {
             ,HttpStatus.OK
         );
     }
-
-    // public ResponseEntity<?> getCommentListByCommunityIdx(Long communityIdx){
-    //     List<CommentEntity> commentEntityList = commentRepository.findByCommunityEntity_Idx(communityIdx);
-    //     ResCommunityDetailDTO dto = ResCommunityDetailDTO.builder()
-    //     .commentList(ResCommunityDetailDTO.Comment.fromEntityList(commentEntityList))
-    //     .build();
-
-    //     return new ResponseEntity<>(
-    //         ResponseDTO.builder()
-    //         .code(0)
-    //         .message("댓글 조회에 성공했습니다.")
-    //         .data(dto)
-    //         .build(),HttpStatus.OK
-    //     );
-    // }
 
     // 게시글 댓글 등록하기
     @Transactional
