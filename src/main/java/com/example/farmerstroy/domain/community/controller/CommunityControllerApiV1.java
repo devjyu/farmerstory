@@ -62,4 +62,11 @@ public class CommunityControllerApiV1 {
         LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
         return communityServiceApiV1.updateCommentTable(commentIdx, dto, userDTO);
     }
+
+    // 게시글 댓글 삭제하기
+    @DeleteMapping("/comment/{commentIdx}")
+    public ResponseEntity<?> deleteCommentTable(@PathVariable Long commentIdx, ResCommunityDetailDTO dto, HttpSession session) {
+        LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
+        return communityServiceApiV1.deleteCommentTable(commentIdx, userDTO);
+    }
 }

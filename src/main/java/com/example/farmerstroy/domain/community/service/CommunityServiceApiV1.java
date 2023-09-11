@@ -222,4 +222,31 @@ public class CommunityServiceApiV1 {
             ,HttpStatus.OK
         );
     }
+    
+    // 게시글 댓글 삭제하기
+    @Transactional
+    public ResponseEntity<?> deleteCommentTable(Long idx, LoginUserDTO loginUserDTO) {
+        Optional<CommentEntity> commentEntityOptional = commentRepository.findByIdx(idx);
+
+        if (commentEntityOptional.isEmpty()) {
+            throw new BadRequestException("해당 댓글이 없습니다.");
+        }
+
+        CommentEntity commentEntity = commentEntityOptional.get();
+
+        if (!commentEntity.getUserEntity().getIdx().equals(loginUserDTO.getUser().getIdx())) {
+            throw new BadRequestException("권한이 없습니다.");
+        }
+
+        commentRepository.delete(commentEntity);
+
+        return new ResponseEntity<>(
+            ResponseDTO.builder()
+                .code(0)
+                .message("댓글 삭제에 성공했습니다.")
+                .build()
+            ,HttpStatus.OK
+        );
+    }
+
 }
