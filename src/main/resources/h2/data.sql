@@ -32,10 +32,10 @@ VALUES  ('상추', '채소 팔아요', '싱싱한 채소 있어요!!', 3000, 'ht
 
 -- 커뮤니티테이블
 INSERT INTO `community` (`title`, `content`,`community_img`, `create_date`, `user_idx`)
-VALUES  ('안녕하세요', '오늘 처음 가입해보았습니다', 'http://via.placeholder.com/320x240', now(), 2),
-        ('반갑습니다.', '소통하고 지내요', 'http://via.placeholder.com/320x240', now(), 4);
+VALUES  ('안녕하세요', '오늘 처음 가입해보았습니다', 'http://via.placeholder.com/320x240',  TIMESTAMP '2023-09-10 17:40:12.843154', 2),
+        ('반갑습니다.', '소통하고 지내요', 'http://via.placeholder.com/320x240', TIMESTAMP '2023-09-11 17:40:12.843154', 4);
 
 -- 커맨트테이블
 INSERT INTO `comment` (`content`, `create_date`, `user_idx`, `community_idx`)
-VALUES ('좋아요 잘지내봐요', now(), 2, 1),
-       ('저도 잘지내봐요', now(), 3, 1);
+VALUES ('좋아요 잘지내봐요', TIMESTAMP '2023-09-11 17:43:44.046743', 2, 1),
+       ('저도 잘지내봐요', TIMESTAMP '2023-09-11 17:43:44.046743', 3, 1);
