@@ -64,62 +64,64 @@
             </ul>
         </div>
         <div class="saleDetail" th:each="saleDetail : ${resSaleDetailList.sale}">
-            <div class="saleDetailImg">
-                <img th:src="${saleDetail.saleImg}" alt="" style="height: 400px;">
-            </div>
-            <div class="saleDetailTableIntroduce">
-                <h1 th:text="${saleDetail.title}"></h1>
-                <table>
-                    <caption>
-                        <details>
-                            <summary>상품정보</summary>
-                        </details>
-                    </caption>
-                    <tbody>
-                        <tr>
-                            <th>상품이름</th>
-                            <td th:text="${saleDetail.name}"></td>
-                        </tr>
-                        <tr>
-                            <th>판매가</th>
-                            <td th:text="${saleDetail.priceStr + '원'}"></td>
-                        </tr>
-                        <tr>
-                            <th>구매수량</th>
-                            <td>
-                                <input type="hidden" id="price" th:value="${saleDetail.price}">
-                                <input id="amount" type="number" value="0" min="0" onchange="pricePayment()">&nbsp;Box
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>배송비</th>
-                            <td>무료배송</td>
-                        </tr>
-                        <tr>
-                            <th>총 결제금액</th>
-                            <td id="allPrice">0</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="saleDetailBtn" th:if="${session.dto != null}">
-                    <div class="button-container" th:if="${session.dto.user.idx == saleDetail.userIdx}">
-                        <button th:onclick="goSaleUpdate([[${saleDetail.idx}]])">수정하기</button>
-                        <button th:onclick="deleteSale([[${saleDetail.idx}]])">삭제하기</button>
+            <div class="saleDetailContent">
+                <div class="saleDetailImg">
+                    <img th:src="${saleDetail.saleImg}" alt="" style="height: 400px;">
+                </div>
+                <div class="saleDetailTableIntroduce">
+                    <h1 th:text="${saleDetail.title}"></h1>
+                    <table>
+                        <caption>
+                            <details>
+                                <summary>상품정보</summary>
+                            </details>
+                        </caption>
+                        <tbody>
+                            <tr>
+                                <th>상품이름</th>
+                                <td th:text="${saleDetail.name}"></td>
+                            </tr>
+                            <tr>
+                                <th>판매가</th>
+                                <td th:text="${saleDetail.priceStr + '원'}"></td>
+                            </tr>
+                            <tr>
+                                <th>구매수량</th>
+                                <td>
+                                    <input type="hidden" id="price" th:value="${saleDetail.price}">
+                                    <input id="amount" type="number" value="0" min="0" onchange="pricePayment()">&nbsp;Box
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>배송비</th>
+                                <td>무료배송</td>
+                            </tr>
+                            <tr>
+                                <th>총 결제금액</th>
+                                <td id="allPrice">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="saleDetailBtn" th:if="${session.dto != null}">
+                        <div class="button-container" th:if="${session.dto.user.idx == saleDetail.userIdx}">
+                            <button th:onclick="goSaleUpdate([[${saleDetail.idx}]])">수정하기</button>
+                            <button th:onclick="deleteSale([[${saleDetail.idx}]])">삭제하기</button>
+                        </div>
+                    </div>
+                    <div class="saleDetailBtn" th:if="${session.dto == null}">
+                        <div class="button-container">
+                            <button>구매하기</button>
+                            <button>담기</button>
+                        </div>
                     </div>
                 </div>
-                <div class="saleDetailBtn" th:if="${session.dto == null}">
-                    <div class="button-container">
-                        <button>구매하기</button>
-                        <button>담기</button>
-                    </div>
-                </div>
             </div>
-        </div>
-        <div class="saleDetail2">
-            <div>
-                <button>상세</button>
-                <button>리뷰</button>
-                <button>문의</button>
+            <div class="saleDetail2">
+                <div>
+                    <button>상세</button>
+                    <button>리뷰</button>
+                    <button>문의</button>
+                </div>
             </div>
         </div>
         <footer>

@@ -128,11 +128,15 @@ header {
 
   /* saledetail.html css */
   .saleDetail {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 50px;
     margin: 50px 0px 100px 0px;
+  }
+
+  .saleDetailContent {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
   }
 
   .saleDetail .saleDetailImg {
