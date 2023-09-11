@@ -96,8 +96,10 @@
                 <div class="comment-text" th:text="${commentList.content}"></div>
                 <div class="commentDate" th:text="${commentList.createDate}"></div>
               </div>
-              <button class="edit-button" onclick="editComment()">[수정]</button>
-              <button class="delete-button" type="button" onclick="deleteComment()">[삭제]</button>
+              <div class="commentBtnContainer" th:if="${session.dto != null && session.dto.user.id == commentList.userId}">
+                <button class="edit-button" onclick="editComment()">[수정]</button>
+                <button class="delete-button" type="button" onclick="deleteComment()">[삭제]</button>
+              </div>
               <div class="edit-comment">
                 <textarea id="updateCommentText" rows="3" placeholder="300자 이내로 내용을 입력해주세요"></textarea>
                 <div class="editCommentBtncontainer">
