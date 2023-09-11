@@ -102,7 +102,7 @@
                 <textarea id="updateCommentText" rows="3" placeholder="300자 이내로 내용을 입력해주세요"></textarea>
                 <div class="editCommentBtncontainer">
                   <button type="button" onclick="requestCommentUpdate()">저장</button>
-                  <button type="button">취소</button>
+                  <button class="editCancelBtn" type="button" onclick="editCancelComment()">취소</button>
                 </div>
               </div>
           </div>
@@ -247,11 +247,16 @@
       const editCommentDivs = document.querySelectorAll('.edit-comment');
 
       editCommentDivs.forEach(div => {
-          if (div.style.display == 'none') {
-              div.style.display = 'none';
-          } else {
-              div.style.display = 'block';
-          }
+        div.style.display = 'block';
+      });
+    }
+
+    // 댓글 취소 버튼 클릭 시 수정 div 없애기
+    const editCancelComment = () => {
+      const editCommentDivs = document.querySelectorAll('.edit-comment');
+
+      editCommentDivs.forEach(div => {
+        div.style.display = 'none';
       });
     }
 
