@@ -35,6 +35,12 @@ public class ReviewEntity {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Column(name = "review_img")
+    private String reviewImg;
+
+    @Column(name = "grade", nullable = false)
+    private String grade;
+
     @Column(name = "create_date", nullable = false)
     private LocalDateTime createDate;
 

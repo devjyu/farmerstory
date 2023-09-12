@@ -37,6 +37,8 @@ CREATE TABLE `sale` (
 CREATE TABLE `review` (
   `idx` int NOT NULL AUTO_INCREMENT COMMENT 'Review Post Number',
   `content` varchar(1000) NOT NULL COMMENT 'Review Content',
+  `review_img` longtext DEFAULT NULL COMMENT 'Review Post Image',
+  `grade` int NOT NULL AUTO_INCREMENT COMMENT 'Review Post grade',
   `create_date` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Review Creation Date',
   `user_idx` int NOT NULL COMMENT 'User Number who wrote the Review',
   `sale_idx` int NOT NULL COMMENT 'Sale Post Number',

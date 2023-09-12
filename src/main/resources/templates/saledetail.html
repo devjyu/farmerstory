@@ -6,6 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/sale.css">
+        <style>
+            .reviewTable {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+            }
+
+            .reviewTable th, td {
+                padding: 10px;
+                text-align: left;
+            }
+
+            .reviewTable th {
+                background-color: #4CAF50;
+                color: #fff;
+            }
+        </style>
         <title>Famer's Story 상세페이지</title>
     </head>
     <body onload="toggleContentArea('productDescription')">
@@ -127,7 +144,7 @@
                         <h3 th:text="${saleDetail.introduction}"></h3>
                     </div>
                     <div class="saleDetail2Review">
-                        <table>
+                        <table class="reviewTable">
                             <thead>
                                 <tr>
                                     <th>제목</th>
