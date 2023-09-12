@@ -266,6 +266,14 @@ header {
     text-align: center;
   }
 
+  .saleDetail2Review {
+    display: none;
+  }
+
+  .saleDetail2Qanda {
+    display: none;
+  }
+
   /* saleinsert.html, saleupdate.html */
   .uploadContainer {
     display: flex;

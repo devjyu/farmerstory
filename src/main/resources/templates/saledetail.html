@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/css/sale.css">
         <title>Famer's Story 상세페이지</title>
     </head>
-    <body>
+    <body onload="toggleContentArea('productDescription')">
         <!-- <img th:src="${session.dto.user.profileImg}" alt="프로필"> -->
         <header>
             <div>
@@ -118,14 +118,37 @@
             </div>
             <div class="saleDetail2">
                 <div class="saleDetail2ContentBtn">
-                    <button>상세</button>
-                    <button>리뷰</button>
-                    <button>문의</button>
+                    <button class="introductionBtn" type="button" onclick="toggleContentArea('productDescription')">상세</button>
+                    <button class="reviewBtn" type="button" onclick="toggleContentArea('productReviews')">리뷰</button>
+                    <button class="q&aBtn" type="button" onclick="toggleContentArea('productQuestions')">문의</button>
                 </div>
                 <div class="saleDetail2Content">
-                    <p>
+                    <div class="saleDetail2Introduction">
                         <h3 th:text="${saleDetail.introduction}"></h3>
-                    </p>
+                    </div>
+                    <div class="saleDetail2Review">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>제목</th>
+                                    <th>내용</th>
+                                    <th>작성일</th>
+                                    <th>작성자</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>제목</td>
+                                <td>내용</td>
+                                <td>작성일</td>
+                                <td>작성자</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="saleDetail2Qanda">
+                        <h1>문의하기</h1>
+                    </div>
                 </div>
             </div>
         </div>
@@ -206,6 +229,31 @@
                 };
             })
         }
+
+        // button에 따른 div가 다르게 보이게 하기
+        const toggleContentArea = (area) => {
+            const descriptionDiv = document.querySelectorAll('.saleDetail2Introduction');
+            const reviewsDiv = document.querySelectorAll('.saleDetail2Review');
+            const questionsDiv = document.querySelectorAll('.saleDetail2Qanda');
+
+            descriptionDiv.forEach(div => {
+                div.style.display = area === 'productDescription' ? 'block' : 'none';
+            });
+
+            reviewsDiv.forEach(div => {
+                div.style.display = area === 'productReviews' ? 'block' : 'none';
+            });
+
+            questionsDiv.forEach(div => {
+                div.style.display = area === 'productQuestions' ? 'block' : 'none';
+            });
+        }
+
+        toggleContentArea('productDescription');
+
+        toggleContentArea('productReviews');
+
+        toggleContentArea('productQuestions');
 
     </script>
 </html>
