@@ -1,7 +1,10 @@
 package com.example.farmerstroy.domain.sale.dto;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.List;
 
+import com.example.farmerstroy.model.review.entity.ReviewEntity;
 import com.example.farmerstroy.model.sale.entity.SaleEntity;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +22,7 @@ import lombok.ToString;
 public class ResSaleDetailDTO {
 
     private Sale sale;
-
+    private List<Review> reviewList;
 
     @NoArgsConstructor
     @AllArgsConstructor
@@ -51,5 +54,38 @@ public class ResSaleDetailDTO {
                     .userIdx(saleEntity.getUserEntity().getIdx())
                     .build();
         }
-    }    
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @Getter
+    public static class Review {
+        private Long idx;
+        private String content;
+        private String reviewImg;
+        private String grade;
+        private LocalDate createDate;
+        private String userId;
+        private Long saleIdx;
+
+        public static Review fromEntity(ReviewEntity reviewEntity) {
+            return Review.builder()
+            .idx(reviewEntity.getIdx())
+            .content(reviewEntity.getContent())
+            .reviewImg(reviewEntity.getReviewImg())
+            .grade(reviewEntity.getGrade())
+            .createDate(reviewEntity.getCreateDate())
+            .userId(reviewEntity.getUserEntity().getId())
+            .saleIdx(reviewEntity.getSaleEntity().getIdx())
+            .build();
+        }
+
+        public static List<Review> fromEntityList(List<ReviewEntity> reviewEntityList) {
+            return reviewEntityList.stream()
+            .map((reviewEntity) -> Review.fromEntity(reviewEntity))
+            .toList();
+        }
+
+    }
 }

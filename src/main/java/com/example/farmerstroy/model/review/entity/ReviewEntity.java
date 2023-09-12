@@ -1,6 +1,6 @@
 package com.example.farmerstroy.model.review.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.example.farmerstroy.model.sale.entity.SaleEntity;
 import com.example.farmerstroy.model.user.entity.UserEntity;
@@ -42,7 +42,7 @@ public class ReviewEntity {
     private String grade;
 
     @Column(name = "create_date", nullable = false)
-    private LocalDateTime createDate;
+    private LocalDate createDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx", referencedColumnName = "idx", updatable = false, nullable = false)
