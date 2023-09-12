@@ -274,6 +274,21 @@ header {
     display: none;
   }
 
+  .reviewTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+
+  .reviewTable th, td {
+    padding: 10px;
+    text-align: left;
+  }
+
+  .reviewTable th {
+    background-color: #ddd;
+  }
+
   /* saleinsert.html, saleupdate.html */
   .uploadContainer {
     display: flex;

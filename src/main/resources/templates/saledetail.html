@@ -6,23 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/sale.css">
-        <style>
-            .reviewTable {
-                width: 80%;
-                margin: 20px auto;
-                border-collapse: collapse;
-            }
-
-            .reviewTable th, td {
-                padding: 10px;
-                text-align: left;
-            }
-
-            .reviewTable th {
-                background-color: #4CAF50;
-                color: #fff;
-            }
-        </style>
         <title>Famer's Story 상세페이지</title>
     </head>
     <body onload="toggleContentArea('productDescription')">
@@ -147,18 +130,18 @@
                         <table class="reviewTable">
                             <thead>
                                 <tr>
-                                    <th>제목</th>
                                     <th>내용</th>
+                                    <th>평점</th>
                                     <th>작성일</th>
                                     <th>작성자</th>
                                 </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>제목</td>
-                                <td>내용</td>
-                                <td>작성일</td>
-                                <td>작성자</td>
+                              <tr th:each="review : ${resSaleDetailList.reviewList}">
+                                <td th:text="${review.content}"></td>
+                                <td th:text="${review.grade}">평점</td>
+                                <td th:text="${review.createDate}">작성일</td>
+                                <td th:text="${review.userId}">작성자</td>
                               </tr>
                             </tbody>
                         </table>
