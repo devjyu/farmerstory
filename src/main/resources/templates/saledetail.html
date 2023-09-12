@@ -70,7 +70,7 @@
                 </div>
                 <div class="saleDetailTableIntroduce">
                     <h1 th:text="${saleDetail.title}"></h1>
-                    <table>
+                    <table class="saleTable">
                         <caption>
                             <details>
                                 <summary>상품정보</summary>
@@ -127,6 +127,9 @@
                         <h3 th:text="${saleDetail.introduction}"></h3>
                     </div>
                     <div class="saleDetail2Review">
+                        <div class="writeBtn" th:if="${session.dto != null}">
+                            <button type="button">작성하기</button>
+                        </div>
                         <table class="reviewTable">
                             <thead>
                                 <tr>
