@@ -139,6 +139,7 @@
         .then((res) => res.json())
         .then((result) => {
           const cardContainerTag = document.querySelector("#cardContainer");
+          // const cardContainerWrapperTag = document.querySelector("#cardContainerWrapper");
 
           if (result.code === 0 && result.data.saleList.length > 0) {
 
@@ -158,10 +159,12 @@
               );
             });
           } else {
+            cardContainerTag.innerHTML = "";
+
             // If there are no cards, display the message
             cardContainerTag.innerHTML = 
-              `<div class = "cardNonText" style="top: 300px;">
-                <img src="/img/no.png" alt="없어요이미지" style="margin-right: 100px">
+              ` <div class="cardNoImage">
+                <img src="/img/no.png" alt="없어요이미지">
               </div>`;
           }
         });
