@@ -35,7 +35,9 @@ INSERT INTO `review` (`content`,`review_img`, `grade`, `create_date`, `user_idx`
 VALUES  ('오늘 처음 구매해보았습니다', 'http://via.placeholder.com/320x240', '5',  now(), 3, 1),
         ('너무 만족해요', 'http://via.placeholder.com/320x240', '4', now(), 5, 1),
         ('오늘 처음 구매해보았습니다', 'http://via.placeholder.com/320x240', '4', now(), 5, 2),
-        ('너무 만족해요', 'http://via.placeholder.com/320x240', '5', now(), 3, 2);
+        ('너무 만족해요', 'http://via.placeholder.com/320x240', '5', now(), 3, 2),
+        ('오늘 처음 구매해보았습니다', 'http://via.placeholder.com/320x240', '5',  now(), 3, 1),
+        ('오늘 처음 구매해보았습니다', 'http://via.placeholder.com/320x240', '5',  now(), 3, 1);
 
 -- 커뮤니티테이블
 INSERT INTO `community` (`title`, `content`,`community_img`, `create_date`, `user_idx`)

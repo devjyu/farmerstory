@@ -159,6 +159,9 @@
                         <h3 th:text="${saleDetail.introduction}"></h3>
                     </div>
                     <div class="saleDetail2Review">
+                        <div class="nonReviewCardContainer" th:if="${#lists.isEmpty(resSaleDetailList.reviewList)}">
+                            <h1>작성된 리뷰가 없습니다.</h1>
+                        </div>
                         <div class="reviewCardContainer">
                             <div class="reviewCard" th:each="review : ${resSaleDetailList.reviewList}">
                                 <img src="http://via.placeholder.com/320x240" alt="reviewImage" />

@@ -273,11 +273,19 @@ header {
     display: none;
   }
 
+  .saleDetail2Review .nonReviewCardContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .saleDetail2Review .nonReviewCardContainer h1{
+    margin: 0;
+  }
+
   .saleDetail2Review .reviewCardContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
-    margin: 10px 0px;
   }
 
   .saleDetail2Qanda {
