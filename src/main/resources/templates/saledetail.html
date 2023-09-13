@@ -128,7 +128,7 @@
                     </div>
                     <div class="saleDetail2Review">
                         <div class="writeBtn" th:if="${session.dto != null}">
-                            <button type="button">작성하기</button>
+                            <button th:onclick="goReviewInsert([[${saleDetail.idx}]])">작성하기</button>
                         </div>
                         <table class="reviewTable">
                             <thead>
@@ -209,6 +209,11 @@
         // saleIdX에 따른 수정페이지 이동 함수
         const goSaleUpdate = (saleIdx) => {
             location.href = "/sale/saledetail/" + saleIdx;
+        }
+
+        // saleidx에 따른 리뷰 작성페이지 이동 함수
+        const goReviewInsert = (saleIdx) => {
+            location.href = "/sale/reviewinsert/" + saleIdx;
         }
 
         // 삭제하기

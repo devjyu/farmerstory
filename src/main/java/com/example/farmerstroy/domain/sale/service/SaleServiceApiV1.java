@@ -13,11 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.farmerstroy.common.dto.LoginUserDTO;
 import com.example.farmerstroy.common.dto.ResponseDTO;
 import com.example.farmerstroy.common.exception.BadRequestException;
+import com.example.farmerstroy.domain.sale.dto.ReqReviewInsertDTO;
 import com.example.farmerstroy.domain.sale.dto.ReqSaleInsertDTO;
 import com.example.farmerstroy.domain.sale.dto.ReqSaleUpdateDTO;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDTO;
 import com.example.farmerstroy.model.category.entity.CategoryEntity;
 import com.example.farmerstroy.model.category.repository.CategoryRepository;
+import com.example.farmerstroy.model.review.entity.ReviewEntity;
+import com.example.farmerstroy.model.review.repository.ReviewRepository;
 import com.example.farmerstroy.model.sale.entity.SaleEntity;
 import com.example.farmerstroy.model.sale.repositroy.SaleRepository;
 import com.example.farmerstroy.model.user.entity.UserEntity;
@@ -33,6 +36,7 @@ public class SaleServiceApiV1 {
     private final SaleRepository saleRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final ReviewRepository reviewRepository;
 
     // 판매페이지 게시글 카테고리 idx로 게시글 조회
     public ResponseEntity<?> getSaleListByCategoryIdx(Long categoryIdx) {
@@ -45,6 +49,65 @@ public class SaleServiceApiV1 {
                         .data(dto)
                         .build(),
                 HttpStatus.OK);
+    }
+
+    // 리뷰 등록
+    @Transactional
+    public ResponseEntity<?> insertReviewTable(Long idx, ReqReviewInsertDTO dto, LoginUserDTO loginUserDTO) throws IOException {
+        if (
+            dto == null || dto.getContent() == null || 
+            dto.getContent().equals("") || dto.getGrade() == null
+        ) {
+            throw new BadRequestException("정보를 입력해주세요");
+        }
+
+        if (loginUserDTO == null) {
+            throw new BadRequestException("로그인 해주세요");
+        }
+
+        Optional<UserEntity> userEntityOptional = userRepository.findById(loginUserDTO.getUser().getId());
+
+        if (userEntityOptional.isEmpty()) {
+            throw new BadRequestException("삭제된 유저입니다.");
+        }
+
+        UserEntity userEntity = userEntityOptional.get();
+
+        Optional<SaleEntity> saleEntityOptional = saleRepository.findByIdx(idx);
+
+        if (saleEntityOptional.isEmpty()) {
+            throw new BadRequestException("삭제된 게시글입니다.");
+        }
+
+        SaleEntity saleEntity = saleEntityOptional.get();
+
+        String reviewImg = null;
+
+        if (dto.getReviewImg() != null) {
+            String imgBase64 = Base64.getEncoder().encodeToString(dto.getReviewImg().getBytes());
+            reviewImg = "data:" + dto.getReviewImg().getContentType() + ";base64," + imgBase64;
+            // System.out.println("사진" + communityImg);
+        } else {
+            reviewImg = "http://via.placeholder.com/320x240";
+        }
+
+        ReviewEntity reviewEntity = ReviewEntity.builder()
+        // .idx(dto.getIdx())
+        .content(dto.getContent())
+        .grade(dto.getGrade())
+        .reviewImg(reviewImg)
+        .saleEntity(saleEntity)
+        .userEntity(userEntity)
+        .build();
+
+        reviewRepository.save(reviewEntity);
+
+        return new ResponseEntity<>(
+            ResponseDTO.builder()
+            .code(0)
+            .message("리뷰 등록에 성공했습니다.")
+            .build(),HttpStatus.OK
+        );
     }
 
     // 상품 등록

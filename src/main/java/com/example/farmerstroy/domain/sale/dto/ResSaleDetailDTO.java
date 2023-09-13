@@ -64,7 +64,7 @@ public class ResSaleDetailDTO {
         private Long idx;
         private String content;
         private String reviewImg;
-        private String grade;
+        private Integer grade;
         private LocalDate createDate;
         private String userId;
         private Long saleIdx;

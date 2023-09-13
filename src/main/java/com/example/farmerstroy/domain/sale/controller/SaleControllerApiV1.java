@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.farmerstroy.common.dto.LoginUserDTO;
+import com.example.farmerstroy.domain.sale.dto.ReqReviewInsertDTO;
 import com.example.farmerstroy.domain.sale.dto.ReqSaleInsertDTO;
 import com.example.farmerstroy.domain.sale.dto.ReqSaleUpdateDTO;
 import com.example.farmerstroy.domain.sale.dto.ResSaleDetailDTO;
@@ -59,5 +60,11 @@ public class SaleControllerApiV1 {
         // System.out.println(idx);
         // System.out.println(userDTO);
         return saleServiceApiV1.deleteSaleTable(idx, userDTO);
+    }
+
+    @PostMapping("/reviewInsert/{saleIdx}")
+    public ResponseEntity<?> insertReviewTable(@PathVariable Long saleIdx, ReqReviewInsertDTO dto, HttpSession session) throws IOException {
+        LoginUserDTO userDTO = (LoginUserDTO) session.getAttribute("dto");
+        return saleServiceApiV1.insertReviewTable(saleIdx, dto, userDTO);
     }
 }

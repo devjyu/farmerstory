@@ -58,4 +58,11 @@ public class SaleController {
         }
         return "saleupdate";
     }
+
+    // 리뷰 작성하기
+    @GetMapping("/sale/reviewinsert/{saleIdx}")
+    public String reviewPage(@PathVariable Long saleIdx, Model model) {
+        model.addAttribute("saleIdx", saleIdx);
+        return "reviewinsert";
+    }
 }

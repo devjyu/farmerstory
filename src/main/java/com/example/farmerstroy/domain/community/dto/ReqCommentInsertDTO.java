@@ -16,7 +16,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ReqCommentInsertDTO {
-
     
         @NotBlank(message = "내용을 입력해주세요")
         @Size(min = 1, max = 300, message = "300자 이하로 입력해주세요")

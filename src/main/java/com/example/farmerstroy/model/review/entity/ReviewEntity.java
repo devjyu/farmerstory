@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "review")
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class ReviewEntity {
     
     @Id
@@ -39,7 +41,7 @@ public class ReviewEntity {
     private String reviewImg;
 
     @Column(name = "grade", nullable = false)
-    private String grade;
+    private Integer grade;
 
     @Column(name = "create_date", nullable = false)
     private LocalDate createDate;
