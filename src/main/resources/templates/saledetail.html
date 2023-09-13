@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/sale.css">
+        <style>
+            .reviewCard{
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                max-width: 300px;
+            }
+
+            .reviewCard img {
+                height: 183px;
+                max-width: 100%;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            .reviewUserAndDate{
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .reviewDate {
+                font-size: 1rem;
+                color: #777;
+            }
+
+            .reviewContent {
+                display: flex;
+                margin: 5px 0px 10px 0px;
+            }
+
+            .reviewGrade {
+                display: flex;
+            }
+        </style>
         <title>Famer's Story 상세페이지</title>
     </head>
     <body onload="toggleContentArea('productDescription')">
@@ -127,27 +159,17 @@
                         <h3 th:text="${saleDetail.introduction}"></h3>
                     </div>
                     <div class="saleDetail2Review">
-                        <div class="writeBtn" th:if="${session.dto != null}">
-                            <button th:onclick="goReviewInsert([[${saleDetail.idx}]])">작성하기</button>
+                        <div class="reviewCardContainer">
+                            <div class="reviewCard" th:each="review : ${resSaleDetailList.reviewList}">
+                                <img src="http://via.placeholder.com/320x240" alt="reviewImage" />
+                                <div class="reviewUserAndDate">
+                                    <p class="reviewUser" th:text="${review.userId}"></p>
+                                    <p class="reviewDate" th:text="${review.createDate}"></p>
+                                </div>
+                                <h3 class="reviewContent" th:text="${review.content}"></h3>
+                                <h5 class="reviewGrade" th:text="${review.grade}"></h5>
+                            </div>
                         </div>
-                        <table class="reviewTable">
-                            <thead>
-                                <tr>
-                                    <th>내용</th>
-                                    <th>평점</th>
-                                    <th>작성일</th>
-                                    <th>작성자</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              <tr th:each="review : ${resSaleDetailList.reviewList}">
-                                <td th:text="${review.content}"></td>
-                                <td th:text="${review.grade}">평점</td>
-                                <td th:text="${review.createDate}">작성일</td>
-                                <td th:text="${review.userId}">작성자</td>
-                              </tr>
-                            </tbody>
-                        </table>
                     </div>
                     <div class="saleDetail2Qanda">
                         <h1>문의하기</h1>
